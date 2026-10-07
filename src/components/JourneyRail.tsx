@@ -5,7 +5,7 @@ const steps = [
   { id: "story", href: "#story", label: "Story" },
   { id: "day", href: "#day", label: "Day" },
   { id: "venue", href: "#venue", label: "Venue" },
-  { id: "rsvp", href: "#rsvp", label: "RSVP" },
+  { id: "moments", href: "#moments", label: "Moments" },
 ] as const
 
 type StepId = (typeof steps)[number]["id"]

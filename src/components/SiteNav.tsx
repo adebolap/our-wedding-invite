@@ -5,7 +5,7 @@ const links = [
   { href: "#story", label: "Story", id: "story" },
   { href: "#day", label: "Day", id: "day" },
   { href: "#venue", label: "Venue", id: "venue" },
-  { href: "#rsvp", label: "RSVP", id: "rsvp" },
+  { href: "#moments", label: "Moments", id: "moments" },
 ] as const
 
 export function SiteNav() {

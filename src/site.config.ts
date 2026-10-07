@@ -7,7 +7,8 @@ export const site = {
     two: { first: "Seun", full: "Seun Adebola" },
   },
   monogram: "K & S",
-  tagline: "Together with our families, we invite you to celebrate our marriage.",
+  tagline:
+    "You're on the guest list — here's everything you need for our celebration.",
   date: {
     label: "Sunday, 29 November 2026",
     iso: "2026-11-29T16:00:00+01:00",
@@ -24,7 +25,7 @@ export const site = {
   venueImage: "/venue.jpg",
   story: {
     headline: "A quiet yes that grew louder",
-    body: "What began as long walks and longer conversations became a promise we are ready to keep. We cannot wait to gather the people who shaped us and begin the next chapter together.",
+    body: "What began as long walks and longer conversations became a promise we are ready to keep. We cannot wait to gather with you and begin the next chapter together.",
   },
   schedule: [
     {
@@ -43,11 +44,17 @@ export const site = {
       detail: "A shared meal, toasts, and a night on the floor.",
     },
   ],
-  rsvp: {
-    headline: "Kindly reply by 1 November 2026",
-    body: "Let us know if you can celebrate with us — and if you will bring a guest.",
-    /** Optional: paste a Formspree / Getform endpoint to collect responses. */
-    endpoint: "",
+  moments: {
+    headline: "A little more of us",
+    body: "Scratch to uncover a few favourite frames — and a door into more of our world.",
+    websiteLabel: "Visit our website",
+    /** Set this to your couple site / gallery URL when ready. */
+    websiteUrl: "",
+    images: [
+      { src: "/moment-1.jpg", alt: "A quiet moment together" },
+      { src: "/moment-2.jpg", alt: "Soft light and celebration" },
+      { src: "/moment-3.jpg", alt: "Hands and rings" },
+    ],
   },
   dressCode: "Garden formal — soft colors welcome",
   footerNote: "With love, Kelly & Seun",

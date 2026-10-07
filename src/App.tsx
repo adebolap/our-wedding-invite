@@ -4,8 +4,8 @@ import { Countdown } from "./components/Countdown"
 import { FloatingAccents } from "./components/FloatingAccents"
 import { InviteGate } from "./components/InviteGate"
 import { JourneyRail } from "./components/JourneyRail"
+import { MomentsScratch } from "./components/MomentsScratch"
 import { Reveal } from "./components/Reveal"
-import { RsvpForm } from "./components/RsvpForm"
 import { SiteNav } from "./components/SiteNav"
 import { useLenis } from "./hooks/useLenis"
 
@@ -48,11 +48,11 @@ export default function App() {
             </h1>
             <p className="hero__lede">{site.tagline}</p>
             <div className="hero__actions">
-              <a className="btn btn--solid" href="#rsvp">
-                RSVP
-              </a>
-              <a className="btn btn--ghost" href="#day">
+              <a className="btn btn--solid" href="#day">
                 View the day
+              </a>
+              <a className="btn btn--ghost" href="#moments">
+                Our moments
               </a>
             </div>
           </div>
@@ -63,7 +63,7 @@ export default function App() {
             <div className="story__media">
               <img
                 src={site.gatheringImage}
-                alt="Guests gathered for a celebration"
+                alt="A quiet celebration moment"
                 width={1600}
                 height={1200}
                 loading="lazy"
@@ -145,17 +145,30 @@ export default function App() {
           </div>
         </Reveal>
 
-        <Reveal as="section" className="section rsvp" delay={80}>
-          <div id="rsvp" aria-labelledby="rsvp-title">
-            <div className="rsvp__panel">
-              <div>
-                <p className="section__eyebrow">RSVP</p>
-                <h2 className="section__title" id="rsvp-title">
-                  {site.rsvp.headline}
-                </h2>
-                <p className="section__body">{site.rsvp.body}</p>
-              </div>
-              <RsvpForm />
+        <Reveal as="section" className="section moments" delay={80}>
+          <div id="moments" aria-labelledby="moments-title">
+            <div className="moments__intro">
+              <p className="section__eyebrow">For our guests</p>
+              <h2 className="section__title" id="moments-title">
+                {site.moments.headline}
+              </h2>
+              <p className="section__body">{site.moments.body}</p>
+            </div>
+
+            <MomentsScratch />
+
+            <div className="moments__grid">
+              {site.moments.images.map((image) => (
+                <figure className="moments__frame" key={image.src}>
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    width={1200}
+                    height={900}
+                    loading="lazy"
+                  />
+                </figure>
+              ))}
             </div>
           </div>
         </Reveal>

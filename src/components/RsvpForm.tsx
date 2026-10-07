@@ -11,6 +11,7 @@ export function RsvpForm() {
   const [status, setStatus] = useState<Status>(initialStatus)
   const [submitting, setSubmitting] = useState(false)
   const [scratchOpen, setScratchOpen] = useState(false)
+  const [scratchKey, setScratchKey] = useState(0)
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -41,6 +42,7 @@ export function RsvpForm() {
         message: "Thank you — your reply has been received.",
       })
       if (attending === "yes") {
+        setScratchKey((value) => value + 1)
         setScratchOpen(true)
       }
     } catch {
@@ -123,7 +125,11 @@ export function RsvpForm() {
         ) : null}
       </form>
 
-      <ScratchReveal open={scratchOpen} onClose={() => setScratchOpen(false)} />
+      <ScratchReveal
+        key={scratchKey}
+        open={scratchOpen}
+        onClose={() => setScratchOpen(false)}
+      />
     </>
   )
 }

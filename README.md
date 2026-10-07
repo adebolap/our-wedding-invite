@@ -1,6 +1,6 @@
 # Our Wedding Invite
 
-A single-page wedding invitation site for **Kelly & Seun**.
+A single-page celebration site for **Kelly & Seun** — built for confirmed guests (RSVP is handled separately).
 
 ## Customize
 
@@ -9,10 +9,8 @@ Edit [`src/site.config.ts`](src/site.config.ts) to set:
 - Partner names and monogram
 - Date, time, venue, and map link
 - Story copy, schedule, dress code
-- Hero / section images under `public/`
-- Optional RSVP endpoint (`rsvp.endpoint`) for Formspree, Getform, etc.
-
-Until an endpoint is set, the RSVP form shows a local success message only.
+- Images under `public/` (hero, story, venue, moment gallery)
+- Optional couple website URL (`moments.websiteUrl`) for the scratch reveal
 
 ## Develop
 

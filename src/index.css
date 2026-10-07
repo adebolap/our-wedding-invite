@@ -483,87 +483,123 @@ textarea {
   object-fit: cover;
 }
 
-.rsvp {
+.moments {
   padding-bottom: calc(var(--space-2xl) + 1rem);
 }
 
-.rsvp__panel {
+.moments__intro {
+  margin-bottom: var(--space-lg);
+  max-width: 40rem;
+}
+
+.moments-scratch {
+  position: relative;
+  margin: 0 0 var(--space-xl);
+  min-height: clamp(16rem, 42vw, 24rem);
+  border-radius: 0.15rem;
+  overflow: hidden;
+  touch-action: none;
+  background: #1a2421;
+}
+
+.moments-scratch__reveal {
+  position: absolute;
+  inset: 0;
+}
+
+.moments-scratch__reveal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.moments-scratch__caption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 1.4rem 1.2rem 1.25rem;
+  background: linear-gradient(180deg, transparent, rgba(20, 32, 28, 0.72));
+  color: var(--white);
   display: grid;
-  gap: clamp(1.5rem, 4vw, 3rem);
+  gap: 0.65rem;
+  justify-items: start;
 }
 
-@media (min-width: 900px) {
-  .rsvp__panel {
-    grid-template-columns: 0.9fr 1.1fr;
-    align-items: start;
-  }
+.moments-scratch__names {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 560;
 }
 
-.rsvp__form {
-  display: grid;
-  gap: 1rem;
+.moments-scratch__note {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
 }
 
-.field {
-  display: grid;
-  gap: 0.4rem;
+.moments-scratch__link {
+  color: var(--ink);
 }
 
-.field label {
-  font-size: 0.82rem;
+.moments-scratch__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+.moments-scratch--done .moments-scratch__canvas {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 450ms var(--ease);
+}
+
+.moments-scratch__hint {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 2;
+  margin: 0;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.2rem;
+  background: rgba(245, 248, 244, 0.88);
+  color: var(--ink-soft);
+  font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--leaf-deep);
+  pointer-events: none;
 }
 
-.field input,
-.field select,
-.field textarea {
-  width: 100%;
-  border: 1px solid rgba(20, 32, 28, 0.18);
-  background: rgba(255, 255, 255, 0.72);
-  border-radius: 0.2rem;
-  padding: 0.85rem 0.95rem;
-  color: var(--ink);
-  transition:
-    border-color 180ms var(--ease),
-    box-shadow 180ms var(--ease);
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-  outline: none;
-  border-color: var(--leaf);
-  box-shadow: 0 0 0 3px rgba(74, 107, 84, 0.18);
-}
-
-.field textarea {
-  min-height: 7rem;
-  resize: vertical;
-}
-
-.field-row {
+.moments__grid {
   display: grid;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
-@media (min-width: 640px) {
-  .field-row {
-    grid-template-columns: 1fr 1fr;
+@media (min-width: 720px) {
+  .moments__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-.form-status {
+.moments__frame {
   margin: 0;
-  min-height: 1.4rem;
-  font-size: 0.95rem;
-  color: var(--leaf-deep);
+  overflow: hidden;
+  border-radius: 0.15rem;
+  min-height: 12rem;
 }
 
-.form-status[data-tone="error"] {
-  color: #8a2f2f;
+.moments__frame img {
+  width: 100%;
+  height: 100%;
+  min-height: 12rem;
+  object-fit: cover;
+  transition: transform 700ms var(--ease);
+}
+
+.moments__frame:hover img {
+  transform: scale(1.04);
 }
 
 .footer {
@@ -767,109 +803,6 @@ textarea {
   font-size: 1.4rem;
 }
 
-.scratch-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  display: grid;
-  place-items: center;
-  padding: 1.25rem;
-}
-
-.scratch-modal__backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(20, 32, 28, 0.45);
-  backdrop-filter: blur(8px);
-}
-
-.scratch-modal__panel {
-  position: relative;
-  z-index: 1;
-  width: min(100%, 28rem);
-  padding: 1.6rem 1.4rem 1.4rem;
-  background: var(--paper);
-  border: 1px solid rgba(20, 32, 28, 0.08);
-  box-shadow: var(--shadow-soft);
-  animation: rise 0.55s var(--ease) both;
-}
-
-.scratch-modal__close {
-  position: absolute;
-  top: 0.55rem;
-  right: 0.7rem;
-  border: 0;
-  background: transparent;
-  font-size: 1.6rem;
-  line-height: 1;
-  color: var(--ink-soft);
-  cursor: pointer;
-}
-
-.scratch-modal__title {
-  margin: 0.2rem 0 1rem;
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  font-weight: 560;
-  line-height: 1.15;
-}
-
-.scratch-card {
-  position: relative;
-  height: 12.5rem;
-  border-radius: 0.2rem;
-  overflow: hidden;
-  touch-action: none;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(74, 107, 84, 0.14), transparent 45%),
-    linear-gradient(160deg, #eaf1eb, #f7faf6);
-}
-
-.scratch-card__message {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-content: center;
-  text-align: center;
-  gap: 0.35rem;
-  padding: 1rem;
-}
-
-.scratch-card__message p {
-  margin: 0;
-}
-
-.scratch-card__names {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 560;
-}
-
-.scratch-card__date {
-  color: var(--leaf-deep);
-  font-size: 0.92rem;
-}
-
-.scratch-card__canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  cursor: crosshair;
-}
-
-.scratch-card--done .scratch-card__canvas {
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 400ms var(--ease);
-}
-
-.scratch-modal__hint {
-  margin: 0.9rem 0 0;
-  color: var(--ink-soft);
-  font-size: 0.92rem;
-}
-
 @keyframes seal-pulse {
   from {
     transform: scale(1);
@@ -931,9 +864,12 @@ textarea {
   .timeline__item,
   .invite-gate__seal,
   .float-accent,
-  .invite-gate__card,
-  .scratch-modal__panel {
+  .invite-gate__card {
     animation: none !important;
+  }
+
+  .moments__frame:hover img {
+    transform: none;
   }
 
   .reveal {
@@ -1058,7 +994,7 @@ textarea {
     padding-bottom: calc(var(--space-2xl) + 2.5rem);
   }
 
-  .rsvp {
+  .moments {
     padding-bottom: calc(var(--space-2xl) + 4rem);
   }
 }
@@ -1111,9 +1047,8 @@ textarea {
     width: min(100%, 22rem);
   }
 
-  .scratch-modal__panel {
-    width: min(100%, 22rem);
-    padding: 1.35rem 1.1rem 1.15rem;
+  .moments-scratch {
+    min-height: 18rem;
   }
 }
 

@@ -105,14 +105,16 @@ export function RsvpForm() {
         {submitting ? "Sending…" : "Send RSVP"}
       </button>
 
-      <p
-        className="form-status"
-        data-tone={status.tone === "error" ? "error" : undefined}
-        role="status"
-        aria-live="polite"
-      >
-        {status.message}
-      </p>
+      {status.message ? (
+        <p
+          className="form-status"
+          data-tone={status.tone === "error" ? "error" : undefined}
+          role="status"
+          aria-live="polite"
+        >
+          {status.message}
+        </p>
+      ) : null}
     </form>
   )
 }

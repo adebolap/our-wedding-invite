@@ -13,7 +13,6 @@ export function ScratchReveal({ open, onClose }: ScratchRevealProps) {
 
   useEffect(() => {
     if (!open) return
-    setRevealed(false)
     const canvas = canvasRef.current
     if (!canvas) return
 

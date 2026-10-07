@@ -115,7 +115,7 @@ export default function App() {
             <div className="venue__copy">
               <p className="section__eyebrow">Where</p>
               <h2 className="section__title" id="venue-title">
-                Meet us under the olive trees
+                Meet us at Nómaada
               </h2>
               <div className="venue__meta">
                 <p className="venue__name">{site.venue.name}</p>

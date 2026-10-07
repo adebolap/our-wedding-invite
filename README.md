@@ -1,6 +1,6 @@
 # Our Wedding Invite
 
-A single-page wedding invitation site for **Amara & Seun** (sample names — replace with yours).
+A single-page wedding invitation site for **Kelly & Seun**.
 
 ## Customize
 

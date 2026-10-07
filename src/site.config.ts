@@ -4,10 +4,10 @@
  */
 export const site = {
   partners: {
-    one: { first: "Amara", full: "Amara Okonkwo" },
+    one: { first: "Kelly", full: "Kelly" },
     two: { first: "Seun", full: "Seun Adebola" },
   },
-  monogram: "A & S",
+  monogram: "K & S",
   tagline: "Together with our families, we invite you to celebrate our marriage.",
   date: {
     label: "Saturday, 20 June 2026",
@@ -51,7 +51,7 @@ export const site = {
     endpoint: "",
   },
   dressCode: "Garden formal — soft colors welcome",
-  footerNote: "With love, Amara & Seun",
+  footerNote: "With love, Kelly & Seun",
 } as const
 
 export type SiteConfig = typeof site

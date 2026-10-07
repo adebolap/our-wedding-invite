@@ -92,15 +92,27 @@ textarea {
 }
 
 .nav {
-  position: absolute;
+  position: fixed;
   inset: 0 0 auto;
-  z-index: 5;
+  z-index: 20;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem clamp(1.25rem, 4vw, 3rem);
+  padding: 1.1rem clamp(1.25rem, 4vw, 3rem);
   color: var(--white);
-  mix-blend-mode: difference;
+  background: transparent;
+  transition:
+    background-color 280ms var(--ease),
+    color 280ms var(--ease),
+    box-shadow 280ms var(--ease),
+    backdrop-filter 280ms var(--ease);
+}
+
+.nav--solid {
+  color: var(--ink);
+  background: rgba(245, 248, 244, 0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 rgba(20, 32, 28, 0.08);
 }
 
 .nav__brand {
@@ -123,7 +135,7 @@ textarea {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
-  opacity: 0.9;
+  opacity: 0.92;
   transition: opacity 200ms var(--ease);
 }
 

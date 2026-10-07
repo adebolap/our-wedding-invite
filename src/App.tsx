@@ -1,5 +1,6 @@
 import { site } from "./site.config"
 import { RsvpForm } from "./components/RsvpForm"
+import { SiteNav } from "./components/SiteNav"
 
 const brand = `${site.partners.one.first} & ${site.partners.two.first}`
 
@@ -10,23 +11,7 @@ export default function App() {
         Skip to content
       </a>
 
-      <header className="nav" aria-label="Primary">
-        <div className="nav__brand">{site.monogram}</div>
-        <ul className="nav__links">
-          <li>
-            <a href="#story">Story</a>
-          </li>
-          <li>
-            <a href="#day">Day</a>
-          </li>
-          <li>
-            <a href="#venue">Venue</a>
-          </li>
-          <li>
-            <a href="#rsvp">RSVP</a>
-          </li>
-        </ul>
-      </header>
+      <SiteNav />
 
       <main id="main">
         <section className="hero" aria-label="Invitation">

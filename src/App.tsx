@@ -3,6 +3,7 @@ import { site } from "./site.config"
 import { Countdown } from "./components/Countdown"
 import { FloatingAccents } from "./components/FloatingAccents"
 import { InviteGate } from "./components/InviteGate"
+import { JourneyRail } from "./components/JourneyRail"
 import { Reveal } from "./components/Reveal"
 import { RsvpForm } from "./components/RsvpForm"
 import { SiteNav } from "./components/SiteNav"
@@ -24,9 +25,10 @@ export default function App() {
       <InviteGate onOpen={handleOpen} />
 
       <SiteNav />
+      <JourneyRail active={opened} />
 
       <main id="main">
-        <section className="hero" aria-label="Invitation">
+        <section className="hero" id="hero" aria-label="Invitation">
           <div className="hero__media">
             <img
               src={site.heroImage}

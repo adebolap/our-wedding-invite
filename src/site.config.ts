@@ -1,6 +1,5 @@
 /**
  * Wedding invite content — edit this file to personalize the site.
- * Sample details below are placeholders and should be replaced before sharing.
  */
 export const site = {
   partners: {

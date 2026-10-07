@@ -9,8 +9,8 @@ export const site = {
   monogram: "K & S",
   tagline: "Together with our families, we invite you to celebrate our marriage.",
   date: {
-    label: "Saturday, 20 June 2026",
-    iso: "2026-06-20T15:00:00+01:00",
+    label: "Saturday, 19 June 2027",
+    iso: "2027-06-19T15:00:00+01:00",
     time: "3:00 in the afternoon",
   },
   venue: {
@@ -44,7 +44,7 @@ export const site = {
     },
   ],
   rsvp: {
-    headline: "Kindly reply by 1 May 2026",
+    headline: "Kindly reply by 1 May 2027",
     body: "Let us know if you can celebrate with us — and if you will bring a guest.",
     /** Optional: paste a Formspree / Getform endpoint to collect responses. */
     endpoint: "",

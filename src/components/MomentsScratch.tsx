@@ -24,18 +24,18 @@ export function MomentsScratch() {
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0)
 
       const gradient = ctx.createLinearGradient(0, 0, width, height)
-      gradient.addColorStop(0, "#5f7563")
-      gradient.addColorStop(0.55, "#9a7a45")
-      gradient.addColorStop(1, "#3d5645")
+      gradient.addColorStop(0, "#4A2028")
+      gradient.addColorStop(0.5, "#8B5E3C")
+      gradient.addColorStop(1, "#6B2E3A")
       ctx.fillStyle = gradient
       ctx.fillRect(0, 0, width, height)
 
-      ctx.fillStyle = "rgba(245, 248, 244, 0.92)"
-      ctx.font = "600 15px Manrope, sans-serif"
+      ctx.fillStyle = "rgba(248, 241, 234, 0.95)"
+      ctx.font = "600 15px Outfit, sans-serif"
       ctx.textAlign = "center"
       ctx.fillText("Scratch to reveal", width / 2, height / 2 - 8)
-      ctx.font = "500 12px Manrope, sans-serif"
-      ctx.fillStyle = "rgba(245, 248, 244, 0.75)"
+      ctx.font = "500 12px Outfit, sans-serif"
+      ctx.fillStyle = "rgba(248, 241, 234, 0.78)"
       ctx.fillText("a few of our favourite frames", width / 2, height / 2 + 14)
     }
 

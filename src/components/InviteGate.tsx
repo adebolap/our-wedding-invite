@@ -25,7 +25,7 @@ export function InviteGate({ onOpen }: InviteGateProps) {
     sessionStorage.setItem(STORAGE_KEY, "1")
     window.setTimeout(() => {
       setVisible(false)
-    }, 700)
+    }, 900)
   }
 
   return (
@@ -35,20 +35,30 @@ export function InviteGate({ onOpen }: InviteGateProps) {
       aria-modal="true"
       aria-labelledby="invite-gate-title"
     >
-      <div className="invite-gate__card">
-        <p className="invite-gate__eyebrow">You're invited</p>
-        <div className="invite-gate__seal" aria-hidden="true">
-          <span>{site.monogram}</span>
+      <div className={`invite-box${exiting ? " invite-box--open" : ""}`}>
+        <div className="invite-box__lid" aria-hidden="true">
+          <span className="invite-box__hinge" />
         </div>
-        <h1 className="invite-gate__title" id="invite-gate-title">
-          {site.partners.one.first}
-          <span> & </span>
-          {site.partners.two.first}
-        </h1>
-        <p className="invite-gate__date">{site.date.label}</p>
-        <button type="button" className="btn btn--ink invite-gate__cta" onClick={openInvite}>
-          Open invitation
-        </button>
+        <div className="invite-box__panel">
+          <p className="invite-gate__eyebrow">Save the date</p>
+          <div className="invite-gate__seal" aria-hidden="true">
+            <span>{site.monogram}</span>
+          </div>
+          <h1 className="invite-gate__title" id="invite-gate-title">
+            {site.partners.one.first}
+            <span> & </span>
+            {site.partners.two.first}
+          </h1>
+          <p className="invite-gate__date">{site.date.label}</p>
+          <p className="invite-gate__place">{site.venue.name} · Lagos</p>
+          <button
+            type="button"
+            className="btn btn--gold invite-gate__cta"
+            onClick={openInvite}
+          >
+            Open the box
+          </button>
+        </div>
       </div>
     </div>
   )

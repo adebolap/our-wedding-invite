@@ -56,7 +56,7 @@ export const site = {
       { src: "/moment-3.jpg", alt: "Hands and rings" },
     ],
   },
-  dressCode: "Garden formal — soft colors welcome",
+  dressCode: "Evening formal — soft neutrals and deep tones welcome",
   footerNote: "With love, Kelly & Seun",
 } as const
 

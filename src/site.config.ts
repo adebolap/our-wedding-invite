@@ -24,8 +24,8 @@ export const site = {
   gatheringImage: "/gathering.jpg",
   venueImage: "/venue.jpg",
   story: {
-    headline: "A quiet yes that grew louder",
-    body: "What began as long walks and longer conversations became a promise we are ready to keep. We cannot wait to gather with you and begin the next chapter together.",
+    headline: "Two hearts, one long yes",
+    body: "From sunlit balconies and boat rides to quiet sofas and golden-hour gardens, our story has always been made of small, ordinary wonders. Now we get to say yes — with you beside us — at Nómaada.",
   },
   schedule: [
     {
@@ -45,15 +45,44 @@ export const site = {
     },
   ],
   moments: {
-    headline: "A little more of us",
-    body: "Scratch to uncover a few favourite frames — and a door into more of our world.",
+    headline: "Our love, in frames",
+    body: "Scratch to open a favourite still — then wander through the chapters that brought us here.",
     websiteLabel: "Visit our website",
     /** Set this to your couple site / gallery URL when ready. */
     websiteUrl: "",
-    images: [
-      { src: "/moment-1.jpg", alt: "A quiet moment together" },
-      { src: "/moment-2.jpg", alt: "Soft light and celebration" },
-      { src: "/moment-3.jpg", alt: "Hands and rings" },
+    scratchImage: {
+      src: "/moment-5.jpg",
+      alt: "A forehead kiss on a bright afternoon",
+    },
+    chapters: [
+      {
+        title: "Where we wandered",
+        note: "Cities, water, and the wide open sky.",
+        images: [
+          { src: "/moment-1.jpg", alt: "Balcony selfie above the city" },
+          { src: "/moment-2.jpg", alt: "Smiling on a boat ride" },
+          { src: "/moment-3.jpg", alt: "By the water in the sunshine" },
+        ],
+      },
+      {
+        title: "Everyday tenderness",
+        note: "Home light, soft afternoons, flowers in hand.",
+        images: [
+          { src: "/moment-4.jpg", alt: "Together on the sofa at home" },
+          { src: "/moment-5.jpg", alt: "A gelato-day kiss" },
+          { src: "/moment-6.jpg", alt: "Park bench with a bouquet" },
+          { src: "/moment-7.jpg", alt: "Kelly in the garden glow" },
+        ],
+      },
+      {
+        title: "Becoming forever",
+        note: "White linen, held hands, and the promise ahead.",
+        images: [
+          { src: "/moment-8.jpg", alt: "An embrace by the window" },
+          { src: "/moment-10.jpg", alt: "Holding hands in the doorway" },
+          { src: "/moment-9.jpg", alt: "A festive kiss under the lights" },
+        ],
+      },
     ],
   },
   dressCode: "Evening formal — soft neutrals and deep tones welcome",

@@ -5,6 +5,7 @@ export function MomentsScratch() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const drawing = useRef(false)
   const [revealed, setRevealed] = useState(false)
+  const cover = site.moments.scratchImage
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -36,7 +37,7 @@ export function MomentsScratch() {
       ctx.fillText("Scratch to reveal", width / 2, height / 2 - 8)
       ctx.font = "500 12px Outfit, sans-serif"
       ctx.fillStyle = "rgba(248, 241, 234, 0.78)"
-      ctx.fillText("a few of our favourite frames", width / 2, height / 2 + 14)
+      ctx.fillText("a favourite frame from our story", width / 2, height / 2 + 14)
     }
 
     paint()
@@ -69,12 +70,10 @@ export function MomentsScratch() {
     if (clear / total > 0.42) setRevealed(true)
   }
 
-  const cover = site.moments.images[0]
-
   return (
     <div className={`moments-scratch${revealed ? " moments-scratch--done" : ""}`}>
       <div className="moments-scratch__reveal">
-        <img src={cover.src} alt={cover.alt} width={1200} height={900} />
+        <img src={cover.src} alt={cover.alt} width={1200} height={1600} />
         <div className="moments-scratch__caption">
           <p className="moments-scratch__names">
             {site.partners.one.first} & {site.partners.two.first}
@@ -89,7 +88,7 @@ export function MomentsScratch() {
               {site.moments.websiteLabel}
             </a>
           ) : (
-            <p className="moments-scratch__note">More photos coming soon.</p>
+            <p className="moments-scratch__note">Keep scrolling for more of our story.</p>
           )}
         </div>
       </div>
@@ -115,7 +114,7 @@ export function MomentsScratch() {
       />
       <p className="moments-scratch__hint" role="status" aria-live="polite">
         {revealed
-          ? "Keep scrolling for more moments below."
+          ? "Our chapters continue below."
           : "Use your finger or mouse to scratch."}
       </p>
     </div>

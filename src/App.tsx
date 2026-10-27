@@ -33,8 +33,8 @@ export default function App() {
             <img
               src={site.heroImage}
               alt=""
-              width={2400}
-              height={1600}
+              width={1500}
+              height={2000}
               fetchPriority="high"
             />
           </div>
@@ -63,9 +63,9 @@ export default function App() {
             <div className="story__media">
               <img
                 src={site.gatheringImage}
-                alt="A quiet celebration moment"
-                width={1600}
-                height={1200}
+                alt="Kelly and Seun in a quiet embrace"
+                width={1200}
+                height={1600}
                 loading="lazy"
               />
             </div>
@@ -136,9 +136,9 @@ export default function App() {
             <div className="venue__media">
               <img
                 src={site.venueImage}
-                alt="Wedding venue atmosphere"
-                width={1600}
-                height={1200}
+                alt="Kelly and Seun, ready for forever"
+                width={1200}
+                height={1600}
                 loading="lazy"
               />
             </div>
@@ -157,17 +157,29 @@ export default function App() {
 
             <MomentsScratch />
 
-            <div className="moments__grid">
-              {site.moments.images.map((image) => (
-                <figure className="moments__frame" key={image.src}>
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    width={1200}
-                    height={900}
-                    loading="lazy"
-                  />
-                </figure>
+            <div className="moments__chapters">
+              {site.moments.chapters.map((chapter) => (
+                <Reveal className="moments__chapter" key={chapter.title}>
+                  <div className="moments__chapter-copy">
+                    <p className="section__eyebrow">{chapter.title}</p>
+                    <p className="moments__chapter-note">{chapter.note}</p>
+                  </div>
+                  <div
+                    className={`moments__grid moments__grid--${chapter.images.length}`}
+                  >
+                    {chapter.images.map((image) => (
+                      <figure className="moments__frame" key={image.src}>
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          width={1050}
+                          height={1400}
+                          loading="lazy"
+                        />
+                      </figure>
+                    ))}
+                  </div>
+                </Reveal>
               ))}
             </div>
           </div>

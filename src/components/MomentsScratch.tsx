@@ -34,10 +34,10 @@ export function MomentsScratch() {
       ctx.fillStyle = "rgba(248, 241, 234, 0.95)"
       ctx.font = "600 15px Outfit, sans-serif"
       ctx.textAlign = "center"
-      ctx.fillText("Scratch to reveal", width / 2, height / 2 - 8)
+      ctx.fillText("Scratch gently", width / 2, height / 2 - 8)
       ctx.font = "500 12px Outfit, sans-serif"
       ctx.fillStyle = "rgba(248, 241, 234, 0.78)"
-      ctx.fillText("a favourite frame from our story", width / 2, height / 2 + 14)
+      ctx.fillText("a favourite moment waits beneath", width / 2, height / 2 + 14)
     }
 
     paint()
@@ -88,7 +88,7 @@ export function MomentsScratch() {
               {site.moments.websiteLabel}
             </a>
           ) : (
-            <p className="moments-scratch__note">Keep scrolling for more of our story.</p>
+            <p className="moments-scratch__note">Scroll on for more of us.</p>
           )}
         </div>
       </div>
@@ -114,8 +114,8 @@ export function MomentsScratch() {
       />
       <p className="moments-scratch__hint" role="status" aria-live="polite">
         {revealed
-          ? "Our chapters continue below."
-          : "Use your finger or mouse to scratch."}
+          ? "More of our story waits below."
+          : "Scratch with your finger or mouse."}
       </p>
     </div>
   )

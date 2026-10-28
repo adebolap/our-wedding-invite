@@ -1,5 +1,5 @@
 /**
- * Wedding invite content — edit this file to personalize the site.
+ * Wedding invite content. Edit this file to personalize the site.
  */
 export const site = {
   partners: {
@@ -7,8 +7,7 @@ export const site = {
     two: { first: "Seun", full: "Seun Adebola" },
   },
   monogram: "K & S",
-  tagline:
-    "You're on the guest list — here's everything you need for our celebration.",
+  tagline: "You are already part of our joy. Here is the day we make forever official.",
   date: {
     label: "Sunday, 29 November 2026",
     iso: "2026-11-29T16:00:00+01:00",
@@ -18,35 +17,53 @@ export const site = {
     name: "Nómaada",
     address: "4b Musa Yar'Adua Street, Victoria Island, Lagos",
     mapUrl: "https://maps.google.com/?q=Nomaada+Restaurant+Victoria+Island+Lagos",
-    note: "Join us at Nómaada for the celebration. Victoria Island — parking guidance will follow closer to the day.",
+    note: "We gather at Nómaada on Victoria Island. Parking notes will follow closer to the day.",
   },
   heroImage: "/hero.jpg",
   gatheringImage: "/gathering.jpg",
   venueImage: "/venue.jpg",
   story: {
-    headline: "Two hearts, one long yes",
-    body: "From sunlit balconies and boat rides to quiet sofas and golden-hour gardens, our story has always been made of small, ordinary wonders. Now we get to say yes — with you beside us — at Nómaada.",
+    headline: "Six years, and still choosing us",
+    body: "We first met online through a mutual friend in November 2020. By May 2025, friendship had become love. Between Nigeria and Belgium, across calls, visits, and quiet faith in each other, we grew into this yes.",
+    milestones: [
+      {
+        when: "November 2020",
+        what: "Met virtually through a mutual friend",
+      },
+      {
+        when: "May 2025",
+        what: "Our romance began",
+      },
+      {
+        when: "Nigeria & Belgium",
+        what: "Visits, long talks, and a love that crossed oceans",
+      },
+      {
+        when: "Belgium",
+        what: "Building our life together, side by side",
+      },
+    ],
   },
   schedule: [
     {
       time: "4:00 pm",
       title: "Ceremony",
-      detail: "Join us as we exchange vows.",
+      detail: "Vows, joy, and the start of forever.",
     },
     {
       time: "5:00 pm",
       title: "Cocktails",
-      detail: "Drinks, music, and golden-hour portraits.",
+      detail: "Music, golden light, and sweet company.",
     },
     {
       time: "6:30 pm",
       title: "Dinner & dancing",
-      detail: "A shared meal, toasts, and a night on the floor.",
+      detail: "A long table, warm toasts, and a night that moves.",
     },
   ],
   moments: {
-    headline: "Our love, in frames",
-    body: "Scratch to open a favourite still — then wander through the chapters that brought us here.",
+    headline: "A love you can feel",
+    body: "Scratch open a favourite frame, then wander through the moments that made us us.",
     websiteLabel: "Visit our website",
     /** Set this to your couple site / gallery URL when ready. */
     websiteUrl: "",
@@ -56,8 +73,8 @@ export const site = {
     },
     chapters: [
       {
-        title: "Where we wandered",
-        note: "Cities, water, and the wide open sky.",
+        title: "Miles we crossed",
+        note: "Cities, water, and the wide sky between us.",
         images: [
           { src: "/moment-1.jpg", alt: "Balcony selfie above the city" },
           { src: "/moment-2.jpg", alt: "Smiling on a boat ride" },
@@ -65,8 +82,8 @@ export const site = {
         ],
       },
       {
-        title: "Everyday tenderness",
-        note: "Home light, soft afternoons, flowers in hand.",
+        title: "Soft days",
+        note: "Home light, quiet afternoons, flowers in hand.",
         images: [
           { src: "/moment-4.jpg", alt: "Together on the sofa at home" },
           { src: "/moment-5.jpg", alt: "A gelato-day kiss" },
@@ -75,8 +92,8 @@ export const site = {
         ],
       },
       {
-        title: "Becoming forever",
-        note: "White linen, held hands, and the promise ahead.",
+        title: "This promise",
+        note: "White linen, held hands, forever in view.",
         images: [
           { src: "/moment-8.jpg", alt: "An embrace by the window" },
           { src: "/moment-10.jpg", alt: "Holding hands in the doorway" },
@@ -85,8 +102,8 @@ export const site = {
       },
     ],
   },
-  dressCode: "Evening formal — soft neutrals and deep tones welcome",
-  footerNote: "With love, Kelly & Seun",
+  dressCode: "Evening formal. Soft neutrals and deep tones welcome.",
+  footerNote: "All our love, Kelly & Seun",
 } as const
 
 export type SiteConfig = typeof site

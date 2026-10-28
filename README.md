@@ -1,6 +1,6 @@
 # Our Wedding Invite
 
-A single-page celebration site for **Kelly & Seun** — burgundy save-the-date feel for confirmed guests (RSVP is handled separately).
+A single-page celebration site for **Kelly & Seun**. Burgundy save-the-date feel for confirmed guests (RSVP is handled separately).
 
 ## Customize
 

@@ -49,10 +49,10 @@ export default function App() {
             <p className="hero__lede">{site.tagline}</p>
             <div className="hero__actions">
               <a className="btn btn--solid" href="#day">
-                View the day
+                See the day
               </a>
               <a className="btn btn--ghost" href="#moments">
-                Our moments
+                Our story in photos
               </a>
             </div>
           </div>
@@ -75,6 +75,14 @@ export default function App() {
                 {site.story.headline}
               </h2>
               <p className="section__body">{site.story.body}</p>
+              <ol className="milestones">
+                {site.story.milestones.map((item) => (
+                  <li className="milestones__item" key={item.when}>
+                    <span className="milestones__when">{item.when}</span>
+                    <span className="milestones__what">{item.what}</span>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </Reveal>
@@ -84,10 +92,10 @@ export default function App() {
             <Reveal className="day__intro">
               <p className="section__eyebrow">{site.date.label}</p>
               <h2 className="section__title" id="day-title">
-                The shape of our day
+                One beautiful day
               </h2>
               <p className="section__body">
-                Ceremony begins at {site.date.time}. Dress code: {site.dressCode}.
+                We begin at {site.date.time}. {site.dressCode}
               </p>
               <Countdown />
             </Reveal>
@@ -115,7 +123,7 @@ export default function App() {
             <div className="venue__copy">
               <p className="section__eyebrow">Where</p>
               <h2 className="section__title" id="venue-title">
-                Meet us at Nómaada
+                Find us at Nómaada
               </h2>
               <div className="venue__meta">
                 <p className="venue__name">{site.venue.name}</p>
@@ -148,7 +156,7 @@ export default function App() {
         <Reveal as="section" className="section moments" delay={80}>
           <div id="moments" aria-labelledby="moments-title">
             <div className="moments__intro">
-              <p className="section__eyebrow">For our guests</p>
+              <p className="section__eyebrow">For you</p>
               <h2 className="section__title" id="moments-title">
                 {site.moments.headline}
               </h2>

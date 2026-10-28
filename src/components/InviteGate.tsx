@@ -40,7 +40,7 @@ export function InviteGate({ onOpen }: InviteGateProps) {
           <span className="invite-box__hinge" />
         </div>
         <div className="invite-box__panel">
-          <p className="invite-gate__eyebrow">Save the date</p>
+          <p className="invite-gate__eyebrow">With love</p>
           <div className="invite-gate__seal" aria-hidden="true">
             <span>{site.monogram}</span>
           </div>
@@ -56,7 +56,7 @@ export function InviteGate({ onOpen }: InviteGateProps) {
             className="btn btn--gold invite-gate__cta"
             onClick={openInvite}
           >
-            Open the box
+            Open with love
           </button>
         </div>
       </div>

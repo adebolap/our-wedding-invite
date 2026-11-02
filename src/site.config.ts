@@ -23,9 +23,9 @@ export const site = {
   gatheringImage: "/gathering.jpg",
   venueImage: "/venue.jpg",
   story: {
-    headline: "Two continents. One easy yes.",
-    pull: "A little luck. A lot of heart. Forever, gladly.",
-    body: "A mutual friend put us in each other's path in November 2020. We spent years becoming each other's favourite person. In May 2025, the friendship got brave. We kept crossing Nigeria and Belgium until Belgium became home, and this day became the easy yes.",
+    headline: "Closer than the miles",
+    pull: "It took time. It was worth every bit.",
+    body: "A mutual friend put us in each other's path in November 2020. Even with distance between us, we kept finding our way to each other. It took time to become each other's favourite person. In May 2025, the friendship got brave, and forever became the easy yes.",
     chapters: [
       {
         when: "Nov 2020",
@@ -34,22 +34,22 @@ export const site = {
         alt: "Kelly and Seun smiling on a balcony",
       },
       {
-        when: "May 2025",
-        title: "Cue the butterflies",
-        image: "/moment-5.jpg",
-        alt: "A forehead kiss on a bright afternoon",
-      },
-      {
-        when: "Nigeria & Belgium",
-        title: "Miles for smiles",
+        when: "The miles",
+        title: "Still finding us",
         image: "/moment-2.jpg",
         alt: "Together on a boat ride",
       },
       {
-        when: "Belgium",
-        title: "Home unlocked",
+        when: "Along the way",
+        title: "Favourite, eventually",
         image: "/moment-4.jpg",
         alt: "Cosy together on the sofa",
+      },
+      {
+        when: "May 2025",
+        title: "Cue the butterflies",
+        image: "/moment-5.jpg",
+        alt: "A forehead kiss on a bright afternoon",
       },
     ],
   },

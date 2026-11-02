@@ -529,7 +529,7 @@ textarea {
   height: 100%;
   min-height: inherit;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 22%;
   transition: transform 700ms var(--ease);
 }
 
@@ -537,8 +537,12 @@ textarea {
   transform: scale(1.05);
 }
 
+.story-stamp:nth-child(1) .story-stamp__card img {
+  object-position: center 18%;
+}
+
 .story-stamp:nth-child(2) .story-stamp__card img {
-  object-position: center 35%;
+  object-position: center 28%;
 }
 
 .story-stamp:nth-child(3) .story-stamp__card img {
@@ -546,7 +550,7 @@ textarea {
 }
 
 .story-stamp:nth-child(4) .story-stamp__card img {
-  object-position: center 45%;
+  object-position: center 35%;
 }
 
 .story-stamp__veil {

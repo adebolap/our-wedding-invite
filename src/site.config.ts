@@ -25,7 +25,7 @@ export const site = {
   story: {
     headline: "Closer than the miles",
     pull: "It took time. It was worth every bit.",
-    body: "A mutual friend put us in each other's path in November 2020. Even with distance between us, we kept finding our way to each other. It took time to become each other's favourite person. In May 2025, the friendship got brave, and forever became the easy yes.",
+    body: "A mutual friend put us in each other's path in November 2020. Even with distance between us, we kept finding our way to each other. It took time to become each other's favourite person. Then came the yes that made us one.",
     chapters: [
       {
         when: "2020",
@@ -40,16 +40,22 @@ export const site = {
         alt: "Seun in 2020, before their story began together",
       },
       {
-        when: "Along the way",
-        title: "Favourite, eventually",
-        image: "/moment-4.jpg",
-        alt: "Cosy together on the sofa",
+        when: "Early days",
+        title: "Still getting to know",
+        image: "/story-getting-to-know.jpg",
+        alt: "Kelly and Seun sitting together on a sofa in the early days",
       },
       {
-        when: "May 2025",
-        title: "Cue the butterflies",
-        image: "/moment-5.jpg",
-        alt: "A forehead kiss on a bright afternoon",
+        when: "Almost there",
+        title: "Just before the proposal",
+        image: "/moment-4.jpg",
+        alt: "Kelly and Seun cosy together at home",
+      },
+      {
+        when: "The yes",
+        title: "Finally to be one",
+        image: "/story-finally-one.jpg",
+        alt: "Kelly and Seun close together after saying yes",
       },
     ],
   },

@@ -90,17 +90,31 @@ export default function App() {
                 </h2>
                 <p className="story__pull">{site.story.pull}</p>
                 <p className="section__body">{site.story.body}</p>
-                <ol className="milestones">
-                  {site.story.milestones.map((item) => (
-                    <li className="milestones__item" key={item.when}>
-                      <span className="milestones__marker" aria-hidden="true" />
-                      <span className="milestones__when">{item.when}</span>
-                      <span className="milestones__what">{item.what}</span>
-                    </li>
-                  ))}
-                </ol>
               </div>
             </div>
+            <ol className="story-stamps" aria-label="Story milestones">
+              {site.story.chapters.map((chapter, index) => (
+                <li className="story-stamp" key={chapter.title}>
+                  <article className="story-stamp__card">
+                    <img
+                      src={chapter.image}
+                      alt={chapter.alt}
+                      width={800}
+                      height={1000}
+                      loading="lazy"
+                    />
+                    <div className="story-stamp__veil" aria-hidden="true" />
+                    <div className="story-stamp__meta">
+                      <span className="story-stamp__index">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <p className="story-stamp__title">{chapter.title}</p>
+                      <p className="story-stamp__when">{chapter.when}</p>
+                    </div>
+                  </article>
+                </li>
+              ))}
+            </ol>
           </Reveal>
         </section>
 

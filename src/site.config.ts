@@ -23,25 +23,33 @@ export const site = {
   gatheringImage: "/gathering.jpg",
   venueImage: "/venue.jpg",
   story: {
-    headline: "A love written across two continents",
-    pull: "We found each other early. We chose each other fully.",
-    body: "In November 2020, a mutual friend brought us onto the same screen. Years of late calls, shared laughter, and steady care followed. In May 2025, friendship tipped into love. Between Nigeria and Belgium we kept finding our way to each other, until Belgium became home, and forever became the plan.",
-    milestones: [
+    headline: "Two continents. One easy yes.",
+    pull: "A little luck. A lot of heart. Forever, gladly.",
+    body: "A mutual friend put us in each other's path in November 2020. We spent years becoming each other's favourite person. In May 2025, the friendship got brave. We kept crossing Nigeria and Belgium until Belgium became home, and this day became the easy yes.",
+    chapters: [
       {
-        when: "November 2020",
-        what: "A friend introduced us online",
+        when: "Nov 2020",
+        title: "Plot twist: us",
+        image: "/moment-1.jpg",
+        alt: "Kelly and Seun smiling on a balcony",
       },
       {
         when: "May 2025",
-        what: "Friendship became love",
+        title: "Cue the butterflies",
+        image: "/moment-5.jpg",
+        alt: "A forehead kiss on a bright afternoon",
       },
       {
         when: "Nigeria & Belgium",
-        what: "Visits that closed the distance",
+        title: "Miles for smiles",
+        image: "/moment-2.jpg",
+        alt: "Together on a boat ride",
       },
       {
         when: "Belgium",
-        what: "Home, side by side",
+        title: "Home unlocked",
+        image: "/moment-4.jpg",
+        alt: "Cosy together on the sofa",
       },
     ],
   },

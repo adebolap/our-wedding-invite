@@ -473,12 +473,12 @@ textarea {
 }
 
 .story__title {
-  max-width: 14ch;
+  max-width: 18ch;
 }
 
 .story__pull {
   margin: 1.15rem 0 0;
-  max-width: 22ch;
+  max-width: 26ch;
   font-family: var(--font-display);
   font-style: italic;
   font-size: clamp(1.45rem, 3vw, 1.9rem);

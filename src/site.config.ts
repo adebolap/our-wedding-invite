@@ -23,25 +23,25 @@ export const site = {
   gatheringImage: "/gathering.jpg",
   venueImage: "/venue.jpg",
   story: {
-    headline: "Six years, and still choosing us",
-    pull: "Friendship first. Love next. Forever now.",
-    body: "We first met online through a mutual friend in November 2020. By May 2025, friendship had become love. Between Nigeria and Belgium, across calls, visits, and quiet faith in each other, we grew into this yes.",
+    headline: "A love written across two continents",
+    pull: "We found each other early. We chose each other fully.",
+    body: "In November 2020, a mutual friend brought us onto the same screen. Years of late calls, shared laughter, and steady care followed. In May 2025, friendship tipped into love. Between Nigeria and Belgium we kept finding our way to each other, until Belgium became home, and forever became the plan.",
     milestones: [
       {
         when: "November 2020",
-        what: "Met through a mutual friend",
+        what: "A friend introduced us online",
       },
       {
         when: "May 2025",
-        what: "Our romance began",
+        what: "Friendship became love",
       },
       {
         when: "Nigeria & Belgium",
-        what: "Visits that kept us close across the miles",
+        what: "Visits that closed the distance",
       },
       {
         when: "Belgium",
-        what: "Building our life together",
+        what: "Home, side by side",
       },
     ],
   },

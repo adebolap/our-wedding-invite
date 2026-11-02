@@ -23,24 +23,33 @@ export const site = {
   gatheringImage: "/gathering.jpg",
   venueImage: "/venue.jpg",
   story: {
-    headline: "Six years, and still choosing us",
-    body: "We first met online through a mutual friend in November 2020. By May 2025, friendship had become love. Between Nigeria and Belgium, across calls, visits, and quiet faith in each other, we grew into this yes.",
-    milestones: [
+    headline: "Closer than the miles",
+    pull: "It took time. It was worth every bit.",
+    body: "A mutual friend put us in each other's path in November 2020. Even with distance between us, we kept finding our way to each other. It took time to become each other's favourite person. In May 2025, the friendship got brave, and forever became the easy yes.",
+    chapters: [
       {
-        when: "November 2020",
-        what: "Met virtually through a mutual friend",
+        when: "Nov 2020",
+        title: "Plot twist: us",
+        image: "/moment-1.jpg",
+        alt: "Kelly and Seun smiling on a balcony",
+      },
+      {
+        when: "The miles",
+        title: "Still finding us",
+        image: "/moment-2.jpg",
+        alt: "Together on a boat ride",
+      },
+      {
+        when: "Along the way",
+        title: "Favourite, eventually",
+        image: "/moment-4.jpg",
+        alt: "Cosy together on the sofa",
       },
       {
         when: "May 2025",
-        what: "Our romance began",
-      },
-      {
-        when: "Nigeria & Belgium",
-        what: "Visits, long talks, and a love that crossed oceans",
-      },
-      {
-        when: "Belgium",
-        what: "Building our life together, side by side",
+        title: "Cue the butterflies",
+        image: "/moment-5.jpg",
+        alt: "A forehead kiss on a bright afternoon",
       },
     ],
   },

@@ -58,34 +58,51 @@ export default function App() {
           </div>
         </section>
 
-        <Reveal as="section" className="section story" delay={40}>
-          <div id="story" aria-labelledby="story-title" className="story__inner">
-            <div className="story__media">
-              <img
-                src={site.gatheringImage}
-                alt="Kelly and Seun in a quiet embrace"
-                width={1200}
-                height={1600}
-                loading="lazy"
-              />
+        <section className="story" id="story" aria-labelledby="story-title">
+          <Reveal className="section story__shell" delay={40}>
+            <div className="story__inner">
+              <div className="story__media">
+                <figure className="story__frame">
+                  <img
+                    src={site.gatheringImage}
+                    alt="Kelly and Seun in a quiet embrace"
+                    width={1200}
+                    height={1600}
+                    loading="lazy"
+                  />
+                  <figcaption className="story__caption">
+                    <span className="story__caption-mark">{site.monogram}</span>
+                    <span className="story__caption-text">
+                      {site.partners.one.first} & {site.partners.two.first}
+                    </span>
+                  </figcaption>
+                </figure>
+              </div>
+              <div className="story__copy">
+                <p className="section__eyebrow">Our story</p>
+                <div className="story__ornament" aria-hidden="true">
+                  <span />
+                  <em>{site.monogram}</em>
+                  <span />
+                </div>
+                <h2 className="section__title story__title" id="story-title">
+                  {site.story.headline}
+                </h2>
+                <p className="story__pull">{site.story.pull}</p>
+                <p className="section__body">{site.story.body}</p>
+                <ol className="milestones">
+                  {site.story.milestones.map((item) => (
+                    <li className="milestones__item" key={item.when}>
+                      <span className="milestones__marker" aria-hidden="true" />
+                      <span className="milestones__when">{item.when}</span>
+                      <span className="milestones__what">{item.what}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
-            <div className="story__copy">
-              <p className="section__eyebrow">Our story</p>
-              <h2 className="section__title" id="story-title">
-                {site.story.headline}
-              </h2>
-              <p className="section__body">{site.story.body}</p>
-              <ol className="milestones">
-                {site.story.milestones.map((item) => (
-                  <li className="milestones__item" key={item.when}>
-                    <span className="milestones__when">{item.when}</span>
-                    <span className="milestones__what">{item.what}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </section>
 
         <section className="day" id="day" aria-labelledby="day-title">
           <div className="section">

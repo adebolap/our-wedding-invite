@@ -496,17 +496,24 @@ textarea {
   border-top: 1px solid rgba(176, 141, 87, 0.35);
 }
 
-@media (min-width: 860px) {
+@media (min-width: 720px) {
   .story-stamps {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.95rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .story-stamps {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.9rem;
   }
 }
 
 .story-stamp__card {
   position: relative;
   overflow: hidden;
-  min-height: clamp(11.5rem, 28vw, 16rem);
+  min-height: clamp(11.5rem, 26vw, 15.5rem);
   background: var(--burgundy);
   box-shadow: 0 12px 28px rgba(74, 32, 40, 0.12);
   transform: rotate(var(--stamp-tilt, 0deg));
@@ -517,6 +524,7 @@ textarea {
 .story-stamp:nth-child(2) .story-stamp__card { --stamp-tilt: 1deg; }
 .story-stamp:nth-child(3) .story-stamp__card { --stamp-tilt: -0.7deg; }
 .story-stamp:nth-child(4) .story-stamp__card { --stamp-tilt: 1.1deg; }
+.story-stamp:nth-child(5) .story-stamp__card { --stamp-tilt: -0.9deg; }
 
 .story-stamp__card:hover,
 .story-stamp__card:focus-within {
@@ -546,11 +554,15 @@ textarea {
 }
 
 .story-stamp:nth-child(3) .story-stamp__card img {
-  object-position: center 40%;
+  object-position: center 32%;
 }
 
 .story-stamp:nth-child(4) .story-stamp__card img {
-  object-position: center 35%;
+  object-position: center 40%;
+}
+
+.story-stamp:nth-child(5) .story-stamp__card img {
+  object-position: center 30%;
 }
 
 .story-stamp__veil {
@@ -589,9 +601,10 @@ textarea {
 .story-stamp__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+  font-size: clamp(1.02rem, 1.8vw, 1.28rem);
   line-height: 1.15;
   letter-spacing: -0.01em;
+  max-width: 12ch;
 }
 
 .story-stamp__when {

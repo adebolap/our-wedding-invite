@@ -77,8 +77,8 @@ export const site = {
     },
   ],
   moments: {
-    headline: "A love you can feel",
-    body: "Scratch open a favourite frame, then wander through the moments that made us us.",
+    headline: "Pictures of us",
+    body: "Scratch a favourite frame, then keep going through the days that still make us smile.",
     websiteLabel: "Visit our website",
     /** Set this to your couple site / gallery URL when ready. */
     websiteUrl: "",
@@ -88,8 +88,8 @@ export const site = {
     },
     chapters: [
       {
-        title: "Miles we crossed",
-        note: "Cities, water, and the wide sky between us.",
+        title: "Trips we took",
+        note: "Balcony selfies, boat rides, and sunny walks by the water.",
         images: [
           { src: "/moment-1.jpg", alt: "Balcony selfie above the city" },
           { src: "/moment-2.jpg", alt: "Smiling on a boat ride" },
@@ -97,8 +97,8 @@ export const site = {
         ],
       },
       {
-        title: "Soft days",
-        note: "Home light, quiet afternoons, flowers in hand.",
+        title: "Ordinary days",
+        note: "Sofa afternoons, quick kisses, flowers for no big reason.",
         images: [
           { src: "/moment-4.jpg", alt: "Together on the sofa at home" },
           { src: "/moment-5.jpg", alt: "A gelato-day kiss" },
@@ -107,8 +107,8 @@ export const site = {
         ],
       },
       {
-        title: "This promise",
-        note: "White linen, held hands, forever in view.",
+        title: "After we said yes",
+        note: "White linen, held hands, and that cannot-stop-smiling season.",
         images: [
           { src: "/moment-8.jpg", alt: "An embrace by the window" },
           { src: "/moment-10.jpg", alt: "Holding hands in the doorway" },

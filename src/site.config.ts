@@ -107,8 +107,8 @@ export const site = {
         ],
       },
       {
-        title: "After we said yes",
-        note: "White linen, held hands, and that cannot-stop-smiling season.",
+        title: "Sure of us",
+        note: "Quiet embraces, held hands, and Christmas lights.",
         images: [
           { src: "/moment-8.jpg", alt: "An embrace by the window" },
           { src: "/moment-10.jpg", alt: "Holding hands in the doorway" },

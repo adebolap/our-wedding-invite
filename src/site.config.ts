@@ -28,16 +28,16 @@ export const site = {
     body: "A mutual friend put us in each other's path in November 2020. Even with distance between us, we kept finding our way to each other. It took time to become each other's favourite person. In May 2025, the friendship got brave, and forever became the easy yes.",
     chapters: [
       {
-        when: "Nov 2020",
-        title: "Plot twist: us",
-        image: "/moment-1.jpg",
-        alt: "Kelly and Seun smiling on a balcony",
+        when: "2020",
+        title: "Hello, Kelly",
+        image: "/story-2020-kelly.jpg",
+        alt: "Kelly in 2020, before their story began together",
       },
       {
-        when: "The miles",
-        title: "Still finding us",
-        image: "/moment-2.jpg",
-        alt: "Together on a boat ride",
+        when: "2020",
+        title: "Hello, Seun",
+        image: "/story-2020-seun.jpg",
+        alt: "Seun in 2020, before their story began together",
       },
       {
         when: "Along the way",

@@ -77,8 +77,8 @@ export const site = {
     },
   ],
   moments: {
-    headline: "Pictures of us",
-    body: "Scratch a favourite frame, then keep going through the days that still make us smile.",
+    headline: "From then to yes",
+    body: "Scratch a favourite frame, then follow the same path as our story: finding our way, growing into favourites, and choosing forever.",
     websiteLabel: "Visit our website",
     /** Set this to your couple site / gallery URL when ready. */
     websiteUrl: "",
@@ -88,8 +88,8 @@ export const site = {
     },
     chapters: [
       {
-        title: "Trips we took",
-        note: "Balcony selfies, boat rides, and sunny walks by the water.",
+        title: "Closer than the miles",
+        note: "Even with distance between us, we kept finding our way to each other.",
         images: [
           { src: "/moment-1.jpg", alt: "Balcony selfie above the city" },
           { src: "/moment-2.jpg", alt: "Smiling on a boat ride" },
@@ -97,8 +97,8 @@ export const site = {
         ],
       },
       {
-        title: "Ordinary days",
-        note: "Sofa afternoons, quick kisses, flowers for no big reason.",
+        title: "Still getting to know",
+        note: "It took time to become each other's favourite person.",
         images: [
           { src: "/moment-4.jpg", alt: "Together on the sofa at home" },
           { src: "/moment-5.jpg", alt: "A gelato-day kiss" },
@@ -107,8 +107,8 @@ export const site = {
         ],
       },
       {
-        title: "Sure of us",
-        note: "Quiet embraces, held hands, and Christmas lights.",
+        title: "Finally to be one",
+        note: "Then came the yes that made forever feel easy.",
         images: [
           { src: "/moment-8.jpg", alt: "An embrace by the window" },
           { src: "/moment-10.jpg", alt: "Holding hands in the doorway" },

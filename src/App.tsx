@@ -126,8 +126,20 @@ export default function App() {
                 One beautiful day
               </h2>
               <p className="section__body">
-                We begin at {site.date.time}. {site.dressCode}
+                We begin at {site.date.time}. Dress code: {site.dressCode}.
               </p>
+              <ul className="colour-cocktail" aria-label="Colour cocktail">
+                {site.colourCocktail.map((swatch) => (
+                  <li className="colour-cocktail__item" key={swatch.name}>
+                    <span
+                      className="colour-cocktail__swatch"
+                      style={{ background: swatch.hex }}
+                      aria-hidden="true"
+                    />
+                    <span className="colour-cocktail__name">{swatch.name}</span>
+                  </li>
+                ))}
+              </ul>
               <Countdown />
             </Reveal>
             <ol className="timeline">

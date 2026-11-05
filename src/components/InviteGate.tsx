@@ -50,7 +50,8 @@ export function InviteGate({ onOpen }: InviteGateProps) {
             {site.partners.two.first}
           </h1>
           <p className="invite-gate__date">{site.date.label}</p>
-          <p className="invite-gate__place">{site.venue.name} · Lagos</p>
+          <p className="invite-gate__place">{site.venue.name}, Lagos</p>
+          <p className="invite-gate__time">4:00 PM</p>
           <button
             type="button"
             className="btn btn--gold invite-gate__cta"

@@ -23,9 +23,8 @@ export const site = {
   gatheringImage: "/gathering.jpg",
   venueImage: "/venue.jpg",
   story: {
-    headline: "Closer than the miles",
-    pull: "It took time. It was worth every bit.",
-    body: "A mutual friend put us in each other's path in November 2020. Even with distance between us, we kept finding our way to each other. It took time to become each other's favourite person. Then came the yes that made us one.",
+    headline: "He makes everything beautiful in His time",
+    reference: "Ecclesiastes 3:11",
     chapters: [
       {
         when: "2020",
@@ -49,7 +48,7 @@ export const site = {
         when: "Almost there",
         title: "Just before the proposal",
         image: "/story-before-proposal.jpg",
-        alt: "Kelly and Seun close together with a bouquet",
+        alt: "Kelly and Seun together with a bouquet after the proposal",
       },
       {
         when: "The yes",
@@ -75,6 +74,11 @@ export const site = {
       time: "6:30 pm",
       title: "Dinner & dancing",
       detail: "The table, the toasts, the floor.",
+    },
+    {
+      time: "10:45 pm",
+      title: "Evening close",
+      detail: "We wrap the night around here.",
     },
   ],
   moments: {

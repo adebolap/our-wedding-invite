@@ -65,7 +65,7 @@ export default function App() {
                 <figure className="story__frame">
                   <img
                     src={site.gatheringImage}
-                    alt="Kelly and Seun in a quiet embrace"
+                    alt="Kelly and Seun with a bouquet after the proposal"
                     width={1200}
                     height={1600}
                     loading="lazy"
@@ -79,7 +79,6 @@ export default function App() {
                 </figure>
               </div>
               <div className="story__copy">
-                <p className="section__eyebrow">Our story</p>
                 <div className="story__ornament" aria-hidden="true">
                   <span />
                   <em>{site.monogram}</em>
@@ -88,8 +87,7 @@ export default function App() {
                 <h2 className="section__title story__title" id="story-title">
                   {site.story.headline}
                 </h2>
-                <p className="story__pull">{site.story.pull}</p>
-                <p className="section__body">{site.story.body}</p>
+                <p className="story__reference">{site.story.reference}</p>
               </div>
             </div>
             <ol className="story-stamps" aria-label="Story milestones">

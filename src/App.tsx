@@ -32,6 +32,15 @@ export default function App() {
         <section className="hero" id="hero" aria-label="Invitation">
           <div className="hero__media">
             <img
+              className="hero__media-bleed"
+              src={site.heroImage}
+              alt=""
+              width={2100}
+              height={1400}
+              aria-hidden="true"
+            />
+            <img
+              className="hero__media-photo"
               src={site.heroImage}
               alt=""
               width={2100}

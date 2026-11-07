@@ -13,6 +13,7 @@ export function useLenis(enabled: boolean) {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     })
+    ;(window as Window & { __lenis?: Lenis }).__lenis = lenis
 
     let frame = 0
     const raf = (time: number) => {
@@ -23,6 +24,9 @@ export function useLenis(enabled: boolean) {
 
     return () => {
       cancelAnimationFrame(frame)
+      if ((window as Window & { __lenis?: Lenis }).__lenis === lenis) {
+        delete (window as Window & { __lenis?: Lenis }).__lenis
+      }
       lenis.destroy()
     }
   }, [enabled])

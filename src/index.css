@@ -193,13 +193,13 @@ textarea {
 .hero__media::before {
   content: "";
   position: absolute;
-  inset: -4%;
+  inset: -3%;
   z-index: 0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(232, 213, 168, 0.18), transparent 42%),
-    radial-gradient(circle at 80% 30%, rgba(139, 69, 80, 0.2), transparent 45%);
+    radial-gradient(circle at 18% 18%, rgba(232, 213, 168, 0.16), transparent 40%),
+    radial-gradient(circle at 82% 28%, rgba(139, 69, 80, 0.16), transparent 44%);
   pointer-events: none;
-  transform: translateZ(40px);
+  transform: translateZ(36px);
   animation: float-drift 10s var(--ease) infinite alternate;
 }
 
@@ -207,18 +207,25 @@ textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Bias up so both faces stay in frame on tall phones */
-  object-position: 46% 28%;
-  transform: scale(1.12) translate3d(0, 0, 0) rotateX(1.4deg);
-  transform-origin: center 35%;
+  /* Landscape source: keep couple centered with headroom */
+  object-position: 50% 42%;
+  transform: scale(1.06) translate3d(0, 0, 0);
+  transform-origin: center center;
   animation: hero-drift-3d 18s var(--ease) infinite alternate;
-  filter: saturate(1.04) contrast(1.02);
+  filter: saturate(1.03) contrast(1.01);
+}
+
+@media (max-width: 720px) {
+  .hero__media img {
+    /* On tall phones, bias slightly up so heads clear the top edge */
+    object-position: 48% 36%;
+    transform: scale(1.08) translate3d(0, 0, 0);
+  }
 }
 
 @media (min-width: 860px) {
   .hero__media img {
-    object-position: 45% 32%;
-    transform: scale(1.08) translate3d(0, 0, 0) rotateX(1.1deg);
+    object-position: 50% 40%;
   }
 }
 
@@ -227,8 +234,8 @@ textarea {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(42, 24, 32, 0.18) 0%, rgba(74, 32, 40, 0.22) 38%, rgba(42, 24, 32, 0.84) 100%);
-  box-shadow: inset 0 0 120px rgba(42, 24, 32, 0.28);
+    linear-gradient(180deg, rgba(42, 24, 32, 0.12) 0%, rgba(74, 32, 40, 0.2) 40%, rgba(42, 24, 32, 0.84) 100%);
+  box-shadow: inset 0 0 120px rgba(42, 24, 32, 0.22);
 }
 
 .hero__content {
@@ -1477,10 +1484,10 @@ textarea {
 
 @keyframes hero-drift-3d {
   from {
-    transform: scale(1.1) translate3d(0, 0, 0) rotateX(1.2deg) rotateY(-0.8deg);
+    transform: scale(1.05) translate3d(0, 0, 8px) rotateX(0.6deg) rotateY(-0.5deg);
   }
   to {
-    transform: scale(1.16) translate3d(0, -1.2%, 12px) rotateX(2deg) rotateY(0.9deg);
+    transform: scale(1.09) translate3d(0, -0.8%, 18px) rotateX(1.2deg) rotateY(0.6deg);
   }
 }
 
@@ -1511,7 +1518,7 @@ textarea {
   }
 
   .hero__media img {
-    transform: scale(1.06);
+    transform: scale(1.04);
   }
 
   .invite-box--open .invite-box__lid {

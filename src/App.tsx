@@ -34,8 +34,8 @@ export default function App() {
             <img
               src={site.heroImage}
               alt=""
-              width={1500}
-              height={2000}
+              width={2100}
+              height={1400}
               fetchPriority="high"
             />
           </div>

@@ -7,6 +7,7 @@ import { JourneyRail } from "./components/JourneyRail"
 import { MomentsScratch } from "./components/MomentsScratch"
 import { Reveal } from "./components/Reveal"
 import { SiteNav } from "./components/SiteNav"
+import { StyleInspiration } from "./components/StyleInspiration"
 import { useLenis } from "./hooks/useLenis"
 
 const brand = `${site.partners.one.first} & ${site.partners.two.first}`
@@ -138,6 +139,7 @@ export default function App() {
                   </li>
                 ))}
               </ul>
+              <StyleInspiration />
               <Countdown />
             </Reveal>
             <ol className="timeline">

@@ -7,6 +7,7 @@ import { JourneyRail } from "./components/JourneyRail"
 import { MomentsScratch } from "./components/MomentsScratch"
 import { Reveal } from "./components/Reveal"
 import { SiteNav } from "./components/SiteNav"
+import { StyleInspiration } from "./components/StyleInspiration"
 import { useLenis } from "./hooks/useLenis"
 
 const brand = `${site.partners.one.first} & ${site.partners.two.first}`
@@ -65,7 +66,7 @@ export default function App() {
                 <figure className="story__frame">
                   <img
                     src={site.gatheringImage}
-                    alt="Kelly and Seun with a bouquet after the proposal"
+                    alt="Kelly and Seun by the ocean"
                     width={1200}
                     height={1600}
                     loading="lazy"
@@ -138,6 +139,7 @@ export default function App() {
                   </li>
                 ))}
               </ul>
+              <StyleInspiration />
               <Countdown />
             </Reveal>
             <ol className="timeline">

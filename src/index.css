@@ -179,6 +179,7 @@ textarea {
   align-items: end;
   color: var(--white);
   isolation: isolate;
+  perspective: 1600px;
 }
 
 .hero__media {
@@ -186,15 +187,39 @@ textarea {
   inset: 0;
   z-index: -2;
   overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.hero__media::before {
+  content: "";
+  position: absolute;
+  inset: -4%;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(232, 213, 168, 0.18), transparent 42%),
+    radial-gradient(circle at 80% 30%, rgba(139, 69, 80, 0.2), transparent 45%);
+  pointer-events: none;
+  transform: translateZ(40px);
+  animation: float-drift 10s var(--ease) infinite alternate;
 }
 
 .hero__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 48% 42%;
-  transform: scale(1.06);
-  animation: hero-drift 18s var(--ease) infinite alternate;
+  /* Bias up so both faces stay in frame on tall phones */
+  object-position: 46% 28%;
+  transform: scale(1.12) translate3d(0, 0, 0) rotateX(1.4deg);
+  transform-origin: center 35%;
+  animation: hero-drift-3d 18s var(--ease) infinite alternate;
+  filter: saturate(1.04) contrast(1.02);
+}
+
+@media (min-width: 860px) {
+  .hero__media img {
+    object-position: 45% 32%;
+    transform: scale(1.08) translate3d(0, 0, 0) rotateX(1.1deg);
+  }
 }
 
 .hero__veil {
@@ -202,7 +227,8 @@ textarea {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(74, 32, 40, 0.22) 0%, rgba(74, 32, 40, 0.3) 42%, rgba(42, 24, 32, 0.82) 100%);
+    linear-gradient(180deg, rgba(42, 24, 32, 0.18) 0%, rgba(74, 32, 40, 0.22) 38%, rgba(42, 24, 32, 0.84) 100%);
+  box-shadow: inset 0 0 120px rgba(42, 24, 32, 0.28);
 }
 
 .hero__content {
@@ -663,25 +689,38 @@ textarea {
 }
 
 .style-inspire {
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 .style-inspire__trigger {
   appearance: none;
-  border: 0;
-  background: transparent;
-  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.85rem;
+  padding: 0.7rem 1.35rem;
+  border: 1px solid rgba(176, 141, 87, 0.55);
+  border-radius: 0.2rem;
+  background: linear-gradient(180deg, #e8d5a8 0%, #b08d57 100%);
   color: var(--burgundy);
   font: inherit;
-  font-size: 0.98rem;
-  letter-spacing: 0.01em;
-  text-decoration: underline;
-  text-underline-offset: 0.22em;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   cursor: pointer;
+  box-shadow: 0 8px 22px rgba(74, 32, 40, 0.14);
 }
 
 .style-inspire__trigger:hover {
-  color: var(--burgundy-mid);
+  background: linear-gradient(180deg, #f0e2b8 0%, #c4a066 100%);
+}
+
+.style-inspire__hint {
+  margin: 0.65rem 0 0;
+  max-width: 36ch;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 .style-inspire__overlay {
@@ -1436,6 +1475,15 @@ textarea {
   }
 }
 
+@keyframes hero-drift-3d {
+  from {
+    transform: scale(1.1) translate3d(0, 0, 0) rotateX(1.2deg) rotateY(-0.8deg);
+  }
+  to {
+    transform: scale(1.16) translate3d(0, -1.2%, 12px) rotateX(2deg) rotateY(0.9deg);
+  }
+}
+
 @keyframes soft-zoom {
   from {
     transform: scale(1);
@@ -1451,6 +1499,7 @@ textarea {
   }
 
   .hero__media img,
+  .hero__media::before,
   .story__media img,
   .hero__content,
   .story__copy,
@@ -1459,6 +1508,10 @@ textarea {
   .float-accent,
   .invite-box {
     animation: none !important;
+  }
+
+  .hero__media img {
+    transform: scale(1.06);
   }
 
   .invite-box--open .invite-box__lid {

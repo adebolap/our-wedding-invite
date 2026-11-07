@@ -45,6 +45,9 @@ export function StyleInspiration() {
       >
         Need inspiration on what to wear?
       </button>
+      <p className="style-inspire__hint">
+        Open look ideas for her or for him.
+      </p>
 
       {open ? (
         <div className="style-inspire__overlay" role="presentation" onClick={close}>

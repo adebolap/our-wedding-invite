@@ -52,8 +52,8 @@ export default function App() {
               <a className="btn btn--solid" href="#day">
                 See the day
               </a>
-              <a className="btn btn--ghost" href="#moments">
-                Our story in photos
+              <a className="btn btn--ghost" href="#style">
+                What to wear
               </a>
             </div>
           </div>
@@ -139,7 +139,9 @@ export default function App() {
                   </li>
                 ))}
               </ul>
-              <StyleInspiration />
+              <div id="style">
+                <StyleInspiration />
+              </div>
               <Countdown />
             </Reveal>
             <ol className="timeline">

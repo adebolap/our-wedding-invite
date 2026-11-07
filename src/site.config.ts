@@ -10,8 +10,8 @@ export const site = {
   tagline: "We can't wait to celebrate our love with You.",
   date: {
     label: "Sunday, 29 November 2026",
-    iso: "2026-11-29T16:00:00+01:00",
-    time: "4:00 in the afternoon",
+    iso: "2026-11-29T17:00:00+01:00",
+    time: "5:00 in the afternoon",
   },
   venue: {
     name: "Nómaada",
@@ -39,27 +39,26 @@ export const site = {
       },
     ],
   },
-  /** Timeline times pending final confirmation with the planner. */
   schedule: [
     {
-      time: "4:00 pm",
-      title: "Ceremony",
+      time: "5:00 pm",
+      title: "The vow ceremony",
       detail: "We gather for the vows.",
     },
     {
-      time: "5:00 pm",
-      title: "Cocktails",
-      detail: "Drinks and company before dinner.",
+      time: "7:15 pm",
+      title: "Dinner",
+      detail: "A shared meal to begin the evening.",
     },
     {
-      time: "6:30 pm",
-      title: "Dinner & dancing",
-      detail: "The table, the toasts, the floor.",
+      time: "9:15 pm",
+      title: "First dance",
+      detail: "Cake, then we take the floor.",
     },
     {
-      time: "10:45 pm",
-      title: "Evening close",
-      detail: "We wrap the night around here.",
+      time: "10:30 pm",
+      title: "Taco time",
+      detail: "The afterparty meal, and the celebration goes on.",
     },
   ],
   moments: {
@@ -88,7 +87,7 @@ export const site = {
     lede: "Choose for her or for him to open look ideas from our style guide.",
     themeLine: "Glamour chic · A-list · Colour cocktail",
     outdoorNote:
-      "We'll be celebrating outdoors from 4pm into the evening, so dress for the warm Lagos air. Choose light, breathable fabrics like linen, cotton and chiffon. A light layer will be welcome once the sun sets.",
+      "We'll be celebrating outdoors from 5pm into the evening, so dress for the warm Lagos air. Choose light, breathable fabrics like linen, cotton and chiffon. A light layer will be welcome once the sun sets.",
     dos: [
       "Wear colour — bold, soft, or both",
       "Mix shades, tones and prints",

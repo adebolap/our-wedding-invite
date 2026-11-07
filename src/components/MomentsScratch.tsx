@@ -88,7 +88,7 @@ export function MomentsScratch() {
               {site.moments.websiteLabel}
             </a>
           ) : (
-            <p className="moments-scratch__note">Scroll on for more of us.</p>
+            <p className="moments-scratch__note">A favourite moment of ours.</p>
           )}
         </div>
       </div>
@@ -113,9 +113,7 @@ export function MomentsScratch() {
         }}
       />
       <p className="moments-scratch__hint" role="status" aria-live="polite">
-        {revealed
-          ? "More of our story waits below."
-          : "Scratch with your finger or mouse."}
+        {revealed ? "There we are." : "Scratch with your finger or mouse."}
       </p>
     </div>
   )

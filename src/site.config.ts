@@ -19,8 +19,8 @@ export const site = {
     mapUrl: "https://maps.google.com/?q=Nomaada+Restaurant+Victoria+Island+Lagos",
   },
   heroImage: "/hero.jpg",
-  /** Same proposal portrait as the hero, kept beside the verse. */
-  gatheringImage: "/story-before-proposal.jpg",
+  /** Ocean portrait beside the verse. */
+  gatheringImage: "/gathering.jpg",
   story: {
     headline: "He makes everything beautiful in His time",
     reference: "Ecclesiastes 3:11",

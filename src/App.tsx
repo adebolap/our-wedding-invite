@@ -66,7 +66,7 @@ export default function App() {
                 <figure className="story__frame">
                   <img
                     src={site.gatheringImage}
-                    alt="Kelly and Seun with a bouquet after the proposal"
+                    alt="Kelly and Seun by the ocean"
                     width={1200}
                     height={1600}
                     loading="lazy"

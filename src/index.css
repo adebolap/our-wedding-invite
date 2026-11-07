@@ -192,7 +192,7 @@ textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 72%;
+  object-position: 50% 28%;
   transform: scale(1.06);
   animation: hero-drift 18s var(--ease) infinite alternate;
 }
@@ -500,15 +500,9 @@ textarea {
 
 @media (min-width: 720px) {
   .story-stamps {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.95rem;
-  }
-}
-
-@media (min-width: 1100px) {
-  .story-stamps {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0.9rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    max-width: 34rem;
   }
 }
 
@@ -730,8 +724,12 @@ textarea {
   align-items: center;
 }
 
+.venue__inner--simple {
+  max-width: 36rem;
+}
+
 @media (min-width: 860px) {
-  .venue__inner {
+  .venue__inner:not(.venue__inner--simple) {
     grid-template-columns: 0.9fr 1.1fr;
   }
 

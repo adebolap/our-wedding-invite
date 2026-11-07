@@ -121,7 +121,7 @@ export default function App() {
             <Reveal className="day__intro">
               <p className="section__eyebrow">{site.date.label}</p>
               <h2 className="section__title" id="day-title">
-                One beautiful day
+                What to expect
               </h2>
               <p className="section__body">
                 We begin at {site.date.time}. Dress code: {site.dressCode}.
@@ -160,16 +160,14 @@ export default function App() {
         </section>
 
         <Reveal as="section" className="section venue" delay={60}>
-          <div id="venue" aria-labelledby="venue-title" className="venue__inner">
+          <div id="venue" aria-labelledby="venue-title" className="venue__inner venue__inner--simple">
             <div className="venue__copy">
               <p className="section__eyebrow">Where</p>
               <h2 className="section__title" id="venue-title">
-                Find us at Nómaada
+                {site.venue.name}
               </h2>
               <div className="venue__meta">
-                <p className="venue__name">{site.venue.name}</p>
                 <p className="venue__address">{site.venue.address}</p>
-                <p className="venue__note">{site.venue.note}</p>
               </div>
               <p style={{ marginTop: "1.5rem" }}>
                 <a
@@ -181,15 +179,6 @@ export default function App() {
                   Open map
                 </a>
               </p>
-            </div>
-            <div className="venue__media">
-              <img
-                src={site.venueImage}
-                alt="Kelly and Seun, ready for forever"
-                width={1200}
-                height={1600}
-                loading="lazy"
-              />
             </div>
           </div>
         </Reveal>
@@ -205,32 +194,6 @@ export default function App() {
             </div>
 
             <MomentsScratch />
-
-            <div className="moments__chapters">
-              {site.moments.chapters.map((chapter) => (
-                <Reveal className="moments__chapter" key={chapter.title}>
-                  <div className="moments__chapter-copy">
-                    <p className="section__eyebrow">{chapter.title}</p>
-                    <p className="moments__chapter-note">{chapter.note}</p>
-                  </div>
-                  <div
-                    className={`moments__grid moments__grid--${chapter.images.length}`}
-                  >
-                    {chapter.images.map((image) => (
-                      <figure className="moments__frame" key={image.src}>
-                        <img
-                          src={image.src}
-                          alt={image.alt}
-                          width={1050}
-                          height={1400}
-                          loading="lazy"
-                        />
-                      </figure>
-                    ))}
-                  </div>
-                </Reveal>
-              ))}
-            </div>
           </div>
         </Reveal>
       </main>

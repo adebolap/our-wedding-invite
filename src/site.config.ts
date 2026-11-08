@@ -26,16 +26,16 @@ export const site = {
     reference: "Ecclesiastes 3:11",
     chapters: [
       {
-        when: "2020",
-        title: "Her chapter",
+        when: "Nov 2020",
+        title: "Hello, Kelly",
         image: "/story-2020-kelly.jpg",
-        alt: "Portrait from 2020, before their story began together",
+        alt: "Kelly in November 2020, before their story began together",
       },
       {
-        when: "2020",
-        title: "His chapter",
+        when: "Nov 2020",
+        title: "Hello, Seun",
         image: "/story-2020-seun.jpg",
-        alt: "Portrait from 2020, before their story began together",
+        alt: "Seun in November 2020, before their story began together",
       },
     ],
   },

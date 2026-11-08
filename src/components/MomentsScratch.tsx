@@ -75,9 +75,7 @@ export function MomentsScratch() {
       <div className="moments-scratch__reveal">
         <img src={cover.src} alt={cover.alt} width={1200} height={1600} />
         <div className="moments-scratch__caption">
-          <p className="moments-scratch__names">
-            {site.partners.one.first} & {site.partners.two.first}
-          </p>
+          <p className="moments-scratch__names">{site.monogram}</p>
           {site.moments.websiteUrl ? (
             <a
               className="btn btn--solid moments-scratch__link"

@@ -51,13 +51,13 @@ export function InviteGate({ onOpen }: InviteGateProps) {
           </h1>
           <p className="invite-gate__date">{site.date.label}</p>
           <p className="invite-gate__place">{site.venue.name}, Lagos</p>
-          <p className="invite-gate__time">5:00 PM</p>
+          <p className="invite-gate__time">4:00 PM</p>
           <button
             type="button"
             className="btn btn--gold invite-gate__cta"
             onClick={openInvite}
           >
-            Open with love
+            Open the invite
           </button>
         </div>
       </div>

@@ -57,15 +57,16 @@ export function StyleInspiration() {
         aria-labelledby={titleId}
         onClick={(event) => event.stopPropagation()}
       >
+        <div className="style-inspire__grab" aria-hidden="true" />
         <div className="style-inspire__top">
-          <p className="section__eyebrow">Style guide</p>
+          <p className="section__eyebrow">Style</p>
           <button
             ref={closeRef}
             type="button"
             className="style-inspire__close"
             onClick={close}
           >
-            Close
+            Done
           </button>
         </div>
 
@@ -111,7 +112,7 @@ export function StyleInspiration() {
                 className="style-inspire__back"
                 onClick={() => setAudience(null)}
               >
-                ← Choose again
+                Back
               </button>
               <h3 className="style-inspire__title" id={titleId}>
                 {board?.label}
@@ -165,10 +166,10 @@ export function StyleInspiration() {
         className="style-inspire__trigger"
         onClick={() => setOpen(true)}
       >
-        Need inspiration on what to wear?
+        Browse look ideas
       </button>
       <p className="style-inspire__hint">
-        Open look ideas for her or for him.
+        Colour cocktail looks for her and for him.
       </p>
       {typeof document !== "undefined" && dialog
         ? createPortal(dialog, document.body)

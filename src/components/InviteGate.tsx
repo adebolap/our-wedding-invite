@@ -57,7 +57,7 @@ export function InviteGate({ onOpen }: InviteGateProps) {
             className="btn btn--gold invite-gate__cta"
             onClick={openInvite}
           >
-            Open with love
+            Open the invite
           </button>
         </div>
       </div>

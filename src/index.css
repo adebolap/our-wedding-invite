@@ -223,11 +223,20 @@ textarea {
 
 .hero__media-photo {
   z-index: 1;
-  object-fit: contain;
-  object-position: center center;
+  /* Portrait-focus hero: full intimate crop on tall viewports */
+  object-fit: cover;
+  object-position: center 32%;
   transform: translateZ(18px);
   animation: hero-drift-3d 18s var(--ease) infinite alternate;
   filter: saturate(1.03) contrast(1.01);
+}
+
+/* Wide screens: keep the full portrait crop with soft bleed sides */
+@media (min-width: 900px) {
+  .hero__media-photo {
+    object-fit: contain;
+    object-position: center 38%;
+  }
 }
 
 .hero__veil {

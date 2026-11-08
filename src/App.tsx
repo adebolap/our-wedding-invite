@@ -35,16 +35,16 @@ export default function App() {
               className="hero__media-bleed"
               src={site.heroImage}
               alt=""
-              width={2100}
-              height={1400}
+              width={1500}
+              height={2000}
               aria-hidden="true"
             />
             <img
               className="hero__media-photo"
               src={site.heroImage}
-              alt=""
-              width={2100}
-              height={1400}
+              alt="Kelly and Seun in an embrace"
+              width={1500}
+              height={2000}
               fetchPriority="high"
             />
           </div>

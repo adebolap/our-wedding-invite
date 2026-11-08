@@ -7,11 +7,11 @@ export const site = {
     two: { first: "Seun", full: "Seun Adebola" },
   },
   monogram: "K & S",
-  tagline: "We can't wait to celebrate our love with You.",
+  tagline: "We can't wait to celebrate with you.",
   date: {
     label: "Sunday, 29 November 2026",
-    iso: "2026-11-29T17:00:00+01:00",
-    time: "5:00 in the afternoon",
+    iso: "2026-11-29T16:00:00+01:00",
+    time: "4:00 in the afternoon",
   },
   venue: {
     name: "Nómaada",
@@ -27,23 +27,28 @@ export const site = {
     chapters: [
       {
         when: "2020",
-        title: "Hello, Kelly",
+        title: "Her chapter",
         image: "/story-2020-kelly.jpg",
-        alt: "Kelly in 2020, before their story began together",
+        alt: "Portrait from 2020, before their story began together",
       },
       {
         when: "2020",
-        title: "Hello, Seun",
+        title: "His chapter",
         image: "/story-2020-seun.jpg",
-        alt: "Seun in 2020, before their story began together",
+        alt: "Portrait from 2020, before their story began together",
       },
     ],
   },
   schedule: [
     {
+      time: "4:00 pm",
+      title: "Beginning",
+      detail: "Guests arrive as the day opens.",
+    },
+    {
       time: "5:00 pm",
-      title: "The vow ceremony",
-      detail: "We gather for the vows.",
+      title: "Vow ceremony",
+      detail: "The vows begin.",
     },
     {
       time: "7:15 pm",
@@ -57,8 +62,8 @@ export const site = {
     },
     {
       time: "10:30 pm",
-      title: "Taco time",
-      detail: "The afterparty meal, and the celebration goes on.",
+      title: "Dance to the night",
+      detail: "The floor stays open as we celebrate on.",
     },
   ],
   moments: {
@@ -83,11 +88,11 @@ export const site = {
   ],
   colourPaletteImage: "/colour-palette.jpg",
   styleGuide: {
-    prompt: "Need inspiration on what to wear?",
-    lede: "Choose for her or for him to open look ideas from our style guide.",
+    prompt: "Dress code ideas",
+    lede: "Pick a look for her or for him from our style guide.",
     themeLine: "Glamour chic · A-list · Colour cocktail",
     outdoorNote:
-      "We'll be celebrating outdoors from 5pm into the evening, so dress for the warm Lagos air. Choose light, breathable fabrics like linen, cotton and chiffon. A light layer will be welcome once the sun sets.",
+      "We'll be celebrating outdoors from 4pm into the evening, so dress for the warm Lagos air. Choose light, breathable fabrics like linen, cotton and chiffon. A light layer will be welcome once the sun sets.",
     dos: [
       "Wear colour — bold, soft, or both",
       "Mix shades, tones and prints",
@@ -111,7 +116,7 @@ export const site = {
     overviewImage: "/style-guide/colour-cocktail.jpg",
     pdf: "/KS-style-guide.pdf",
   },
-  footerNote: "All our love, Kelly & Seun",
+  footerNote: "All our love",
 } as const
 
 export type SiteConfig = typeof site

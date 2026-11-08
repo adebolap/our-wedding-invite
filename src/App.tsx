@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react"
 import { site } from "./site.config"
 import { Countdown } from "./components/Countdown"
-import { FloatingAccents } from "./components/FloatingAccents"
 import { InviteGate } from "./components/InviteGate"
 import { JourneyRail } from "./components/JourneyRail"
 import { MomentsScratch } from "./components/MomentsScratch"
@@ -9,8 +8,6 @@ import { Reveal } from "./components/Reveal"
 import { SiteNav } from "./components/SiteNav"
 import { StyleInspiration } from "./components/StyleInspiration"
 import { useLenis } from "./hooks/useLenis"
-
-const brand = `${site.partners.one.first} & ${site.partners.two.first}`
 
 export default function App() {
   const [opened, setOpened] = useState(false)
@@ -42,14 +39,13 @@ export default function App() {
             <img
               className="hero__media-photo"
               src={site.heroImage}
-              alt="Kelly and Seun in an embrace"
+              alt=""
               width={1500}
               height={2000}
               fetchPriority="high"
             />
           </div>
           <div className="hero__veil" aria-hidden="true" />
-          <FloatingAccents />
           <div className="hero__content">
             <h1 className="hero__names">
               {site.partners.one.first}
@@ -61,8 +57,8 @@ export default function App() {
               <a className="btn btn--solid" href="#day">
                 See the day
               </a>
-              <a className="btn btn--ghost" href="#style">
-                What to wear
+              <a className="btn btn--ghost hero__action--style" href="#style">
+                Dress code
               </a>
             </div>
           </div>
@@ -75,25 +71,14 @@ export default function App() {
                 <figure className="story__frame">
                   <img
                     src={site.gatheringImage}
-                    alt="Kelly and Seun by the ocean"
+                    alt=""
                     width={1200}
                     height={1600}
                     loading="lazy"
                   />
-                  <figcaption className="story__caption">
-                    <span className="story__caption-mark">{site.monogram}</span>
-                    <span className="story__caption-text">
-                      {site.partners.one.first} & {site.partners.two.first}
-                    </span>
-                  </figcaption>
                 </figure>
               </div>
               <div className="story__copy">
-                <div className="story__ornament" aria-hidden="true">
-                  <span />
-                  <em>{site.monogram}</em>
-                  <span />
-                </div>
                 <h2 className="section__title story__title" id="story-title">
                   {site.story.headline}
                 </h2>
@@ -134,7 +119,8 @@ export default function App() {
                 What to expect
               </h2>
               <p className="section__body">
-                We begin at {site.date.time}. Dress code: {site.dressCode}.
+                We begin at {site.date.time}. Vows at 5:00. Dress code:{" "}
+                {site.dressCode}.
               </p>
               <ul className="colour-cocktail" aria-label="Colour cocktail">
                 {site.colourCocktail.map((swatch) => (
@@ -212,7 +198,7 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        <div className="footer__brand">{brand}</div>
+        <div className="footer__brand">{site.monogram}</div>
         <p>{site.footerNote}</p>
       </footer>
     </div>

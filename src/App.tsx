@@ -85,29 +85,6 @@ export default function App() {
                 <p className="story__reference">{site.story.reference}</p>
               </div>
             </div>
-            <ol className="story-stamps" aria-label="Story milestones">
-              {site.story.chapters.map((chapter, index) => (
-                <li className="story-stamp" key={chapter.title}>
-                  <article className="story-stamp__card">
-                    <img
-                      src={chapter.image}
-                      alt={chapter.alt}
-                      width={800}
-                      height={1000}
-                      loading="lazy"
-                    />
-                    <div className="story-stamp__veil" aria-hidden="true" />
-                    <div className="story-stamp__meta">
-                      <span className="story-stamp__index">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <p className="story-stamp__title">{chapter.title}</p>
-                      <p className="story-stamp__when">{chapter.when}</p>
-                    </div>
-                  </article>
-                </li>
-              ))}
-            </ol>
           </Reveal>
         </section>
 

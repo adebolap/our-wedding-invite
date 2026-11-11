@@ -24,20 +24,6 @@ export const site = {
   story: {
     headline: "He makes everything beautiful in His time",
     reference: "Ecclesiastes 3:11",
-    chapters: [
-      {
-        when: "Nov 2020",
-        title: "Hello, Kelly",
-        image: "/story-2020-kelly.jpg",
-        alt: "Kelly in November 2020, before their story began together",
-      },
-      {
-        when: "Nov 2020",
-        title: "Hello, Seun",
-        image: "/story-2020-seun.jpg",
-        alt: "Seun in November 2020, before their story began together",
-      },
-    ],
   },
   schedule: [
     {

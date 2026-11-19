@@ -22,7 +22,7 @@ export const site = {
   /** Ocean portrait beside the verse. */
   gatheringImage: "/gathering.jpg",
   story: {
-    headline: "He makes everything beautiful in His time",
+    headline: "He makes everything beautiful in its time",
     reference: "Ecclesiastes 3:11",
   },
   schedule: [

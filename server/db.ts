@@ -11,7 +11,16 @@ export async function sql<T = Record<string, unknown>>(
   params: unknown[] = [],
 ): Promise<T[]> {
   if (databaseUrl !== "") {
-    pool ??= new pg.Pool({ connectionString: databaseUrl, max: 5 })
+    pool ??= new pg.Pool({
+      connectionString: databaseUrl,
+      // Neon pooled connections on Vercel: keep the pool tiny.
+      max: 1,
+      idleTimeoutMillis: 5_000,
+      connectionTimeoutMillis: 10_000,
+      ssl: databaseUrl.includes("sslmode=require")
+        ? { rejectUnauthorized: false }
+        : undefined,
+    })
     return (await pool.query(text, params)).rows as T[]
   }
   local ??= startLocal().catch((error: unknown) => {

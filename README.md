@@ -19,7 +19,8 @@ Guests can scan the Share QR code or open `#share` to upload photos.
 - Schema: `migrations/001_guest_photos.sql`
 - API: `GET/POST /api/photos`, `GET /api/photos/:id`
 - Locally the API uses in-memory PGlite (no setup)
-- In production, set `DATABASE_URL` (Neon/Postgres) on Vercel; migrations run on build
+- On Vercel, connect the Neon integration so `DATABASE_URL` (and ideally `DATABASE_URL_UNPOOLED`) are set for Production and Preview
+- Migrations run automatically during `npm run build`
 
 ## Develop
 

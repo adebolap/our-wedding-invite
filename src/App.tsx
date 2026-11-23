@@ -3,6 +3,7 @@ import { site } from "./site.config"
 import { Countdown } from "./components/Countdown"
 import { InviteGate } from "./components/InviteGate"
 import { JourneyRail } from "./components/JourneyRail"
+import { GuestShare } from "./components/GuestShare"
 import { MomentsScratch } from "./components/MomentsScratch"
 import { Reveal } from "./components/Reveal"
 import { SiteNav } from "./components/SiteNav"
@@ -170,6 +171,12 @@ export default function App() {
             </div>
 
             <MomentsScratch />
+          </div>
+        </Reveal>
+
+        <Reveal as="section" className="section share" delay={90}>
+          <div id="share" aria-labelledby="share-title">
+            <GuestShare />
           </div>
         </Reveal>
       </main>

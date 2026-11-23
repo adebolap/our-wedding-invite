@@ -1,10 +1,9 @@
 import { readdir, readFile } from "node:fs/promises"
-import { PGlite } from "@electric-sql/pglite"
 import pg from "pg"
 
 const databaseUrl = process.env.DATABASE_URL?.trim() ?? ""
 let pool: pg.Pool | undefined
-let local: Promise<PGlite> | undefined
+let local: Promise<import("@electric-sql/pglite").PGlite> | undefined
 
 export async function sql<T = Record<string, unknown>>(
   text: string,
@@ -30,7 +29,8 @@ export async function sql<T = Record<string, unknown>>(
   return (await (await local).query<T>(text, params)).rows
 }
 
-async function startLocal(): Promise<PGlite> {
+async function startLocal() {
+  const { PGlite } = await import("@electric-sql/pglite")
   const db = new PGlite()
   const files = (await readdir("migrations").catch(() => []))
     .filter((file) => file.endsWith(".sql"))

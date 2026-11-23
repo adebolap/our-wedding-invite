@@ -48,44 +48,7 @@ app.post("/photos/lock", (c) => {
   return c.json({ unlocked: false })
 })
 
-app.use("/photos", requireAlbumAccess)
-app.use("/photos/*", requireAlbumAccess)
-
-app.get("/photos", async (c) => {
-  try {
-    const photos = await listGuestPhotos()
-    return c.json({
-      photos: photos.map((photo) => ({
-        id: photo.id,
-        guestName: photo.guest_name,
-        caption: photo.caption,
-        mimeType: photo.mime_type,
-        createdAt: photo.created_at,
-        url: `/api/photos/${photo.id}`,
-      })),
-    })
-  } catch (error) {
-    console.error("list photos failed", error)
-    return c.json({ error: "Could not load guest photos." }, 500)
-  }
-})
-
-app.get("/photos/:id", async (c) => {
-  try {
-    const photo = await getGuestPhoto(c.req.param("id"))
-    if (!photo) return c.json({ error: "Photo not found." }, 404)
-    return new Response(photo.bytes, {
-      headers: {
-        "Content-Type": photo.mime_type,
-        "Cache-Control": "private, max-age=3600",
-      },
-    })
-  } catch (error) {
-    console.error("get photo failed", error)
-    return c.json({ error: "Could not load that photo." }, 500)
-  }
-})
-
+// Uploads are open to everyone. Viewing the album requires the PIN.
 app.post("/photos", async (c) => {
   try {
     const form = await c.req.parseBody({ all: true })
@@ -131,6 +94,41 @@ app.post("/photos", async (c) => {
     }
     console.error("create photo failed", error)
     return c.json({ error: "Could not save that photo." }, 500)
+  }
+})
+
+app.get("/photos", requireAlbumAccess, async (c) => {
+  try {
+    const photos = await listGuestPhotos()
+    return c.json({
+      photos: photos.map((photo) => ({
+        id: photo.id,
+        guestName: photo.guest_name,
+        caption: photo.caption,
+        mimeType: photo.mime_type,
+        createdAt: photo.created_at,
+        url: `/api/photos/${photo.id}`,
+      })),
+    })
+  } catch (error) {
+    console.error("list photos failed", error)
+    return c.json({ error: "Could not load guest photos." }, 500)
+  }
+})
+
+app.get("/photos/:id", requireAlbumAccess, async (c) => {
+  try {
+    const photo = await getGuestPhoto(c.req.param("id"))
+    if (!photo) return c.json({ error: "Photo not found." }, 404)
+    return new Response(photo.bytes, {
+      headers: {
+        "Content-Type": photo.mime_type,
+        "Cache-Control": "private, max-age=3600",
+      },
+    })
+  } catch (error) {
+    console.error("get photo failed", error)
+    return c.json({ error: "Could not load that photo." }, 500)
   }
 })
 

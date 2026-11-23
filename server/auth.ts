@@ -62,16 +62,6 @@ export function lockAlbum(c: Context) {
 }
 
 export async function requireAlbumAccess(c: Context, next: Next) {
-  const path = c.req.path
-  if (
-    path.endsWith("/photos/session") ||
-    path.endsWith("/photos/unlock") ||
-    path.endsWith("/photos/lock")
-  ) {
-    await next()
-    return
-  }
-
   if (!pinConfigured()) {
     return c.json(
       { error: "Guest album PIN is not configured on the server." },
@@ -90,5 +80,5 @@ export async function requireAlbumAccess(c: Context, next: Next) {
     return
   }
 
-  return c.json({ error: "Enter the guest album PIN to continue." }, 401)
+  return c.json({ error: "Enter the guest album PIN to view photos." }, 401)
 }

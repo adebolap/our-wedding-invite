@@ -1381,11 +1381,23 @@ textarea {
   margin-top: var(--space-xl);
 }
 
+.guest-share__album-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
 .guest-share__album-title {
-  margin: 0 0 1rem;
+  margin: 0;
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 560;
+}
+
+.guest-share__form--view {
+  max-width: 28rem;
 }
 
 .guest-share__empty {

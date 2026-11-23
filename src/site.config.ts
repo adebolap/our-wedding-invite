@@ -68,7 +68,7 @@ export const site = {
     headline: "Share your photos",
     body: "Scan the QR code or open this page to upload moments from the day. They land in our guest album.",
     /** Public site URL used inside the QR code. */
-    publicUrl: "https://our-wedding-invite-smoky.vercel.app",
+    publicUrl: "https://www.kellyandseun.xyz",
   },
   dressCode: "Theme and colour cocktail",
   colourCocktail: [

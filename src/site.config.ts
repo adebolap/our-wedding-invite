@@ -63,6 +63,13 @@ export const site = {
       alt: "A close laugh together on a park bench",
     },
   },
+  share: {
+    eyebrow: "From your phone",
+    headline: "Share your photos",
+    body: "Scan the QR code or open this page to upload moments from the day. They land in our guest album.",
+    /** Public site URL used inside the QR code. */
+    publicUrl: "https://our-wedding-invite-smoky.vercel.app",
+  },
   dressCode: "Theme and colour cocktail",
   colourCocktail: [
     { name: "Muted sage", hex: "#697350" },

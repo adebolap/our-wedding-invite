@@ -6,6 +6,7 @@ const links = [
   { href: "#day", label: "Day", id: "day" },
   { href: "#venue", label: "Venue", id: "venue" },
   { href: "#moments", label: "Moments", id: "moments" },
+  { href: "#share", label: "Share", id: "share" },
 ] as const
 
 export function SiteNav() {

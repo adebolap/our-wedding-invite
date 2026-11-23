@@ -6,6 +6,7 @@ const steps = [
   { id: "day", href: "#day", label: "Day" },
   { id: "venue", href: "#venue", label: "Venue" },
   { id: "moments", href: "#moments", label: "Moments" },
+  { id: "share", href: "#share", label: "Share" },
 ] as const
 
 type StepId = (typeof steps)[number]["id"]

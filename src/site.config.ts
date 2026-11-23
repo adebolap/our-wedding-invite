@@ -66,7 +66,7 @@ export const site = {
   share: {
     eyebrow: "From your phone",
     headline: "Share your photos",
-    body: "Scan the QR code or open this page to upload moments from the day. They land in our guest album.",
+    body: "Scan the QR code or open this page to upload moments from the day. Viewing the shared album needs the PIN.",
     /** Public site URL used inside the QR code. */
     publicUrl: "https://www.kellyandseun.xyz",
   },

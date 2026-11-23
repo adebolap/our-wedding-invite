@@ -54,6 +54,8 @@ async function compressImage(file: File): Promise<Blob> {
 
 export function GuestShare() {
   const [photos, setPhotos] = useState<GuestPhoto[]>([])
+  const [unlocked, setUnlocked] = useState(false)
+  const [pin, setPin] = useState("")
   const [status, setStatus] = useState<Status>("loading")
   const [message, setMessage] = useState("")
   const [qrDataUrl, setQrDataUrl] = useState("")
@@ -85,31 +87,87 @@ export function GuestShare() {
     }
   }, [shareUrl])
 
+  async function loadPhotos() {
+    const response = await fetch("/api/photos", { credentials: "include" })
+    if (response.status === 401) {
+      setUnlocked(false)
+      setPhotos([])
+      setStatus("ready")
+      return
+    }
+    if (!response.ok) throw new Error("Could not load guest photos.")
+    const data = (await response.json()) as { photos?: GuestPhoto[] }
+    setPhotos(data.photos ?? [])
+    setUnlocked(true)
+    setStatus("ready")
+    setMessage("")
+  }
+
   useEffect(() => {
     let cancelled = false
-    async function load() {
+    async function boot() {
       try {
-        const response = await fetch("/api/photos")
-        if (!response.ok) throw new Error("Could not load guest photos.")
-        const data = (await response.json()) as { photos?: GuestPhoto[] }
-        if (!cancelled) {
-          setPhotos(data.photos ?? [])
+        const session = await fetch("/api/photos/session", {
+          credentials: "include",
+        })
+        const data = (await session.json()) as { unlocked?: boolean }
+        if (cancelled) return
+        if (data.unlocked) {
+          await loadPhotos()
+        } else {
+          setUnlocked(false)
           setStatus("ready")
-          setMessage("")
         }
       } catch {
         if (!cancelled) {
-          setPhotos([])
+          setUnlocked(false)
           setStatus("error")
-          setMessage("Guest photos will appear once the database is connected.")
+          setMessage("Guest photos will appear once the album is available.")
         }
       }
     }
-    void load()
+    void boot()
     return () => {
       cancelled = true
     }
   }, [])
+
+  async function onUnlock(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setMessage("")
+    setStatus("loading")
+    try {
+      const response = await fetch("/api/photos/unlock", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pin }),
+      })
+      const data = (await response.json()) as { error?: string }
+      if (!response.ok) {
+        throw new Error(data.error || "That PIN is not correct.")
+      }
+      setPin("")
+      await loadPhotos()
+      setMessage("Album unlocked. You can share a photo now.")
+    } catch (error) {
+      setUnlocked(false)
+      setStatus("ready")
+      setMessage(
+        error instanceof Error ? error.message : "That PIN is not correct.",
+      )
+    }
+  }
+
+  async function onLock() {
+    await fetch("/api/photos/lock", {
+      method: "POST",
+      credentials: "include",
+    })
+    setUnlocked(false)
+    setPhotos([])
+    setMessage("Album locked on this device.")
+  }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -132,11 +190,16 @@ export function GuestShare() {
 
       const response = await fetch("/api/photos", {
         method: "POST",
+        credentials: "include",
         body,
       })
       const data = (await response.json()) as {
         photo?: GuestPhoto
         error?: string
+      }
+      if (response.status === 401) {
+        setUnlocked(false)
+        throw new Error("Enter the guest album PIN to continue.")
       }
       if (!response.ok || !data.photo) {
         throw new Error(data.error || "Could not save that photo.")
@@ -175,69 +238,116 @@ export function GuestShare() {
             <div className="guest-share__qr-fallback" aria-hidden="true" />
           )}
           <figcaption>
-            Scan to open this page, then upload a photo.
+            Scan to open this page, enter the PIN, then upload a photo.
             <a className="guest-share__link" href={shareUrl}>
               {shareUrl.replace(/^https?:\/\//, "")}
             </a>
           </figcaption>
         </figure>
 
-        <form className="guest-share__form" onSubmit={onSubmit}>
-          <label className="guest-share__field">
-            <span>Your name</span>
-            <input
-              type="text"
-              name="guestName"
-              autoComplete="name"
-              maxLength={60}
-              value={guestName}
-              onChange={(event) => setGuestName(event.target.value)}
-              placeholder="Optional"
-            />
-          </label>
-          <label className="guest-share__field">
-            <span>A short note</span>
-            <input
-              type="text"
-              name="caption"
-              maxLength={140}
-              value={caption}
-              onChange={(event) => setCaption(event.target.value)}
-              placeholder="Optional"
-            />
-          </label>
-          <label className="guest-share__file">
-            <span className="btn btn--ink guest-share__file-btn">
-              {fileName || "Choose a photo"}
-            </span>
-            <input
-              type="file"
-              name="photo"
-              accept="image/jpeg,image/png,image/webp,image/*"
-              required
-              onChange={(event) =>
-                setFileName(event.target.files?.[0]?.name ?? "")
-              }
-            />
-          </label>
-          <button
-            className="btn btn--gold"
-            type="submit"
-            disabled={status === "uploading"}
-          >
-            {status === "uploading" ? "Uploading…" : "Share photo"}
-          </button>
-          {message ? (
-            <p className="guest-share__message" role="status">
-              {message}
+        {!unlocked ? (
+          <form className="guest-share__form" onSubmit={onUnlock}>
+            <p className="guest-share__lock-copy">
+              This album is PIN-protected. Guests need the code to view or add
+              photos.
             </p>
-          ) : null}
-        </form>
+            <label className="guest-share__field">
+              <span>Album PIN</span>
+              <input
+                type="password"
+                name="pin"
+                autoComplete="off"
+                value={pin}
+                onChange={(event) => setPin(event.target.value)}
+                placeholder="Enter PIN"
+                required
+              />
+            </label>
+            <button
+              className="btn btn--gold"
+              type="submit"
+              disabled={status === "loading"}
+            >
+              {status === "loading" ? "Checking…" : "Unlock album"}
+            </button>
+            {message ? (
+              <p className="guest-share__message" role="status">
+                {message}
+              </p>
+            ) : null}
+          </form>
+        ) : (
+          <form className="guest-share__form" onSubmit={onSubmit}>
+            <div className="guest-share__unlocked">
+              <p>Album unlocked on this device.</p>
+              <button
+                type="button"
+                className="guest-share__lock-btn"
+                onClick={() => void onLock()}
+              >
+                Lock
+              </button>
+            </div>
+            <label className="guest-share__field">
+              <span>Your name</span>
+              <input
+                type="text"
+                name="guestName"
+                autoComplete="name"
+                maxLength={60}
+                value={guestName}
+                onChange={(event) => setGuestName(event.target.value)}
+                placeholder="Optional"
+              />
+            </label>
+            <label className="guest-share__field">
+              <span>A short note</span>
+              <input
+                type="text"
+                name="caption"
+                maxLength={140}
+                value={caption}
+                onChange={(event) => setCaption(event.target.value)}
+                placeholder="Optional"
+              />
+            </label>
+            <label className="guest-share__file">
+              <span className="btn btn--ink guest-share__file-btn">
+                {fileName || "Choose a photo"}
+              </span>
+              <input
+                type="file"
+                name="photo"
+                accept="image/jpeg,image/png,image/webp,image/*"
+                required
+                onChange={(event) =>
+                  setFileName(event.target.files?.[0]?.name ?? "")
+                }
+              />
+            </label>
+            <button
+              className="btn btn--gold"
+              type="submit"
+              disabled={status === "uploading"}
+            >
+              {status === "uploading" ? "Uploading…" : "Share photo"}
+            </button>
+            {message ? (
+              <p className="guest-share__message" role="status">
+                {message}
+              </p>
+            ) : null}
+          </form>
+        )}
       </div>
 
       <div className="guest-share__album">
         <h3 className="guest-share__album-title">Guest album</h3>
-        {photos.length === 0 ? (
+        {!unlocked ? (
+          <p className="guest-share__empty">
+            Unlock with the PIN to see guest photos.
+          </p>
+        ) : photos.length === 0 ? (
           <p className="guest-share__empty">
             {status === "loading"
               ? "Loading guest photos…"
@@ -260,7 +370,9 @@ export function GuestShare() {
                   />
                   {(photo.guestName || photo.caption) && (
                     <figcaption>
-                      {photo.guestName ? <strong>{photo.guestName}</strong> : null}
+                      {photo.guestName ? (
+                        <strong>{photo.guestName}</strong>
+                      ) : null}
                       {photo.caption ? <span>{photo.caption}</span> : null}
                     </figcaption>
                   )}

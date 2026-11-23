@@ -1,6 +1,12 @@
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import {
+  hasValidAlbumSession,
+  lockAlbum,
+  requireAlbumAccess,
+  unlockAlbum,
+} from "./auth.js"
+import {
   ALLOWED_MIME,
   createGuestPhoto,
   getGuestPhoto,
@@ -16,10 +22,34 @@ app.use(
   cors({
     origin: "*",
     allowMethods: ["GET", "POST", "OPTIONS"],
+    allowHeaders: ["Content-Type", "X-Guest-Pin"],
+    credentials: true,
   }),
 )
 
 app.get("/health", (c) => c.json({ ok: true }))
+
+app.get("/photos/session", (c) =>
+  c.json({ unlocked: hasValidAlbumSession(c) }),
+)
+
+app.post("/photos/unlock", async (c) => {
+  const body = await c.req.json().catch(() => ({}))
+  const pin = typeof body?.pin === "string" ? body.pin.trim() : ""
+  if (!pin) return c.json({ error: "Enter the guest album PIN." }, 400)
+  if (!unlockAlbum(c, pin)) {
+    return c.json({ error: "That PIN is not correct." }, 401)
+  }
+  return c.json({ unlocked: true })
+})
+
+app.post("/photos/lock", (c) => {
+  lockAlbum(c)
+  return c.json({ unlocked: false })
+})
+
+app.use("/photos", requireAlbumAccess)
+app.use("/photos/*", requireAlbumAccess)
 
 app.get("/photos", async (c) => {
   try {
@@ -47,7 +77,7 @@ app.get("/photos/:id", async (c) => {
     return new Response(photo.bytes, {
       headers: {
         "Content-Type": photo.mime_type,
-        "Cache-Control": "public, max-age=86400",
+        "Cache-Control": "private, max-age=3600",
       },
     })
   } catch (error) {

@@ -1299,6 +1299,35 @@ textarea {
   border: 1px solid rgba(74, 32, 40, 0.08);
 }
 
+.guest-share__lock-copy {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.guest-share__unlocked {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.guest-share__lock-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--burgundy);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
 .guest-share__field {
   display: grid;
   gap: 0.4rem;

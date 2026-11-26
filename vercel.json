@@ -3,9 +3,13 @@
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "functions": {
+    "api/health.ts": {
+      "memory": 256,
+      "maxDuration": 10
+    },
     "api/[[...route]].ts": {
-      "maxDuration": 30,
-      "memory": 1024
+      "memory": 1024,
+      "maxDuration": 30
     }
   }
 }

@@ -17,10 +17,17 @@ import {
 
 const app = new Hono().basePath("/api")
 
+const ALLOWED_ORIGINS = new Set([
+  "https://www.kellyandseun.xyz",
+  "https://kellyandseun.xyz",
+  "http://127.0.0.1:5173",
+  "http://localhost:5173",
+])
+
 app.use(
   "*",
   cors({
-    origin: "*",
+    origin: (origin) => (origin && ALLOWED_ORIGINS.has(origin) ? origin : ""),
     allowMethods: ["GET", "POST", "OPTIONS"],
     allowHeaders: ["Content-Type", "X-Guest-Pin"],
     credentials: true,

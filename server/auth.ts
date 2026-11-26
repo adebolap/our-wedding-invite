@@ -63,6 +63,7 @@ export async function hasValidAlbumSession(c: Context): Promise<boolean> {
 }
 
 function requestIsHttps(c: Context): boolean {
+  if (process.env.VERCEL === "1") return true
   const forwarded = c.req.header("x-forwarded-proto")?.split(",")[0]?.trim()
   if (forwarded) return forwarded === "https"
   try {
@@ -87,7 +88,11 @@ export async function unlockAlbum(c: Context, pin: string): Promise<boolean> {
 }
 
 export function lockAlbum(c: Context) {
-  deleteCookie(c, COOKIE_NAME, { path: "/" })
+  deleteCookie(c, COOKIE_NAME, {
+    path: "/",
+    secure: requestIsHttps(c),
+    sameSite: "Lax",
+  })
 }
 
 export async function requireAlbumAccess(c: Context, next: Next) {

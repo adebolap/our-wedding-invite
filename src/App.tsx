@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { site } from "./site.config"
 import { Countdown } from "./components/Countdown"
 import { InviteGate } from "./components/InviteGate"
@@ -9,22 +9,56 @@ import { Reveal } from "./components/Reveal"
 import { SiteNav } from "./components/SiteNav"
 import { StyleInspiration } from "./components/StyleInspiration"
 import { useLenis } from "./hooks/useLenis"
+import {
+  isShareDeepLink,
+  normalizeShareUrl,
+  scrollToShareSection,
+} from "./lib/shareDeepLink"
 
 export default function App() {
+  const [shareLanding] = useState(() =>
+    typeof window === "undefined" ? false : isShareDeepLink(),
+  )
   const [opened, setOpened] = useState(false)
   const handleOpen = useCallback(() => setOpened(true), [])
-  useLenis(opened)
+  useLenis(opened && !shareLanding)
+
+  useEffect(() => {
+    if (!opened || !shareLanding) return
+
+    normalizeShareUrl()
+
+    // Retry: Lenis mounts after unlock, and mobile layout settles late.
+    let cancelled = false
+    const jump = () => {
+      if (cancelled) return
+      scrollToShareSection("auto")
+      document
+        .getElementById("guest-share-upload")
+        ?.focus({ preventScroll: true })
+    }
+
+    jump()
+    const timers = [50, 150, 400, 900].map((ms) => window.setTimeout(jump, ms))
+
+    return () => {
+      cancelled = true
+      for (const timer of timers) window.clearTimeout(timer)
+    }
+  }, [opened, shareLanding])
 
   return (
-    <div className={`site${opened ? " site--open" : " site--locked"}`}>
+    <div
+      className={`site${opened ? " site--open" : " site--locked"}${shareLanding ? " site--share-landing" : ""}`}
+    >
       <a className="skip-link" href="#main">
         Skip to content
       </a>
 
-      <InviteGate onOpen={handleOpen} />
+      <InviteGate onOpen={handleOpen} bypass={shareLanding} />
 
       <SiteNav />
-      <JourneyRail active={opened} />
+      <JourneyRail active={opened} initialStep={shareLanding ? "share" : "hero"} />
 
       <main id="main">
         <section className="hero" id="hero" aria-label="Invitation">
@@ -174,11 +208,11 @@ export default function App() {
           </div>
         </Reveal>
 
-        <Reveal as="section" className="section share" delay={90}>
+        <section className={`section share${shareLanding ? " share--landing" : ""}`}>
           <div id="share" aria-labelledby="share-title">
-            <GuestShare />
+            <GuestShare focusUpload={shareLanding} />
           </div>
-        </Reveal>
+        </section>
       </main>
 
       <footer className="footer">

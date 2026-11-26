@@ -1,15 +1,5 @@
 {
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
-  ],
-  "functions": {
-    "api/health.ts": {
-      "memory": 256,
-      "maxDuration": 10
-    },
-    "api/[[...route]].ts": {
-      "memory": 1024,
-      "maxDuration": 30
-    }
-  }
+  ]
 }

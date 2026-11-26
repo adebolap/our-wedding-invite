@@ -21,7 +21,7 @@ Guests can scan the Share QR code or open `#share` to upload photos.
 - Locally the API uses in-memory PGlite (no setup)
 - On Vercel, connect the Neon integration so `DATABASE_URL` (and ideally `DATABASE_URL_UNPOOLED`) are set for Production and Preview
 - Production uses the Neon serverless driver; local `npm run dev` falls back to PGlite when `DATABASE_URL` is unset
-- Set `GUEST_ALBUM_PIN` in Vercel (and in `.env.local` for local `npm run dev`) so guests can unlock album viewing
+- Set `GUEST_ALBUM_PIN` in Vercel (and in `.env.local` for local `npm run dev`) so guests can unlock album viewing. If the PIN contains `#`, quote it in env files: `GUEST_ALBUM_PIN="#your-pin#"`
 - Migrations run automatically during `npm run build`
 
 ## Develop

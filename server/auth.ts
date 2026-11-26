@@ -1,6 +1,5 @@
-import { createHmac, timingSafeEqual } from "node:crypto"
 import type { Context, Next } from "hono"
-import { getCookie, setCookie, deleteCookie } from "hono/cookie"
+import { deleteCookie, getCookie, setCookie } from "hono/cookie"
 
 const COOKIE_NAME = "ks_guest_album"
 const COOKIE_PAYLOAD = "unlocked"
@@ -13,15 +12,39 @@ function pinConfigured(): boolean {
   return expectedAlbumPin().length > 0
 }
 
-function pinsMatch(provided: string, expected: string): boolean {
-  const left = Buffer.from(provided)
-  const right = Buffer.from(expected)
-  if (left.length !== right.length) return false
-  return timingSafeEqual(left, right)
+function encodeUtf8(value: string): Uint8Array {
+  return new TextEncoder().encode(value)
 }
 
-function sessionToken(pin: string): string {
-  return createHmac("sha256", pin).update(COOKIE_PAYLOAD).digest("hex")
+function toHex(bytes: ArrayBuffer): string {
+  return [...new Uint8Array(bytes)]
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("")
+}
+
+function timingSafeEqualString(left: string, right: string): boolean {
+  if (left.length !== right.length) return false
+  let mismatch = 0
+  for (let i = 0; i < left.length; i += 1) {
+    mismatch |= left.charCodeAt(i) ^ right.charCodeAt(i)
+  }
+  return mismatch === 0
+}
+
+async function sessionToken(pin: string): Promise<string> {
+  const key = await crypto.subtle.importKey(
+    "raw",
+    encodeUtf8(pin),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  )
+  const signature = await crypto.subtle.sign(
+    "HMAC",
+    key,
+    encodeUtf8(COOKIE_PAYLOAD),
+  )
+  return toHex(signature)
 }
 
 export function readProvidedPin(c: Context): string {
@@ -31,25 +54,31 @@ export function readProvidedPin(c: Context): string {
   return typeof formPin === "string" ? formPin.trim() : ""
 }
 
-export function hasValidAlbumSession(c: Context): boolean {
+export async function hasValidAlbumSession(c: Context): Promise<boolean> {
   const expected = expectedAlbumPin()
   if (!expected) return false
   const cookie = getCookie(c, COOKIE_NAME)
   if (!cookie) return false
-  const want = sessionToken(expected)
-  const left = Buffer.from(cookie)
-  const right = Buffer.from(want)
-  if (left.length !== right.length) return false
-  return timingSafeEqual(left, right)
+  return timingSafeEqualString(cookie, await sessionToken(expected))
 }
 
-export function unlockAlbum(c: Context, pin: string): boolean {
+function requestIsHttps(c: Context): boolean {
+  const forwarded = c.req.header("x-forwarded-proto")?.split(",")[0]?.trim()
+  if (forwarded) return forwarded === "https"
+  try {
+    return new URL(c.req.url, "http://localhost").protocol === "https:"
+  } catch {
+    return false
+  }
+}
+
+export async function unlockAlbum(c: Context, pin: string): Promise<boolean> {
   const expected = expectedAlbumPin()
-  if (!expected || !pinsMatch(pin, expected)) return false
-  const secure = new URL(c.req.url).protocol === "https:"
-  setCookie(c, COOKIE_NAME, sessionToken(expected), {
+  if (!expected || !timingSafeEqualString(pin, expected)) return false
+
+  setCookie(c, COOKIE_NAME, await sessionToken(expected), {
     httpOnly: true,
-    secure,
+    secure: requestIsHttps(c),
     sameSite: "Lax",
     path: "/",
     maxAge: 60 * 60 * 24 * 14,
@@ -69,13 +98,13 @@ export async function requireAlbumAccess(c: Context, next: Next) {
     )
   }
 
-  if (hasValidAlbumSession(c)) {
+  if (await hasValidAlbumSession(c)) {
     await next()
     return
   }
 
   const provided = readProvidedPin(c)
-  if (provided && pinsMatch(provided, expectedAlbumPin())) {
+  if (provided && timingSafeEqualString(provided, expectedAlbumPin())) {
     await next()
     return
   }

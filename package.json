@@ -14,6 +14,7 @@
   "dependencies": {
     "@electric-sql/pglite": "^0.6.0",
     "@neondatabase/serverless": "^1.2.1",
+    "@vercel/node": "^33.0.0",
     "hono": "^4.13.21",
     "lenis": "^1.3.26",
     "pg": "^8.23.1",

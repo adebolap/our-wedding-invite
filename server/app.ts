@@ -29,15 +29,15 @@ app.use(
 
 app.get("/health", (c) => c.json({ ok: true }))
 
-app.get("/photos/session", (c) =>
-  c.json({ unlocked: hasValidAlbumSession(c) }),
+app.get("/photos/session", async (c) =>
+  c.json({ unlocked: await hasValidAlbumSession(c) }),
 )
 
 app.post("/photos/unlock", async (c) => {
   const body = await c.req.json().catch(() => ({}))
   const pin = typeof body?.pin === "string" ? body.pin.trim() : ""
   if (!pin) return c.json({ error: "Enter the guest album PIN." }, 400)
-  if (!unlockAlbum(c, pin)) {
+  if (!(await unlockAlbum(c, pin))) {
     return c.json({ error: "That PIN is not correct." }, 401)
   }
   return c.json({ unlocked: true })
@@ -63,7 +63,7 @@ app.post("/photos", async (c) => {
       return c.json({ error: "Keep each photo under about 900 KB." }, 400)
     }
 
-    const bytes = Buffer.from(await file.arrayBuffer())
+    const bytes = new Uint8Array(await file.arrayBuffer())
     const guestName =
       typeof form.guestName === "string" ? form.guestName : ""
     const caption = typeof form.caption === "string" ? form.caption : ""

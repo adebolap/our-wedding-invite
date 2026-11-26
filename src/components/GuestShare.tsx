@@ -17,6 +17,25 @@ const MAX_EDGE = 1600
 const JPEG_QUALITY = 0.78
 const TARGET_BYTES = 850_000
 
+async function readApiJson<T>(response: Response): Promise<T> {
+  const contentType = response.headers.get("content-type") || ""
+  const raw = await response.text()
+  if (!contentType.includes("application/json")) {
+    throw new Error(
+      response.ok
+        ? "The guest album API returned a non-JSON response. Please try again shortly."
+        : `Guest album API error (${response.status}). Please try again shortly.`,
+    )
+  }
+  try {
+    return JSON.parse(raw) as T
+  } catch {
+    throw new Error(
+      `Guest album API returned invalid JSON (${response.status}). Please try again shortly.`,
+    )
+  }
+}
+
 async function compressImage(file: File): Promise<Blob> {
   if (!file.type.startsWith("image/")) {
     throw new Error("Choose a photo to share.")
@@ -96,8 +115,12 @@ export function GuestShare() {
       setStatus("ready")
       return
     }
-    if (!response.ok) throw new Error("Could not load guest photos.")
-    const data = (await response.json()) as { photos?: GuestPhoto[] }
+    const data = await readApiJson<{ photos?: GuestPhoto[]; error?: string }>(
+      response,
+    )
+    if (!response.ok) {
+      throw new Error(data.error || "Could not load guest photos.")
+    }
     setPhotos(data.photos ?? [])
     setUnlocked(true)
     setStatus("ready")
@@ -111,7 +134,7 @@ export function GuestShare() {
         const session = await fetch("/api/photos/session", {
           credentials: "include",
         })
-        const data = (await session.json()) as { unlocked?: boolean }
+        const data = await readApiJson<{ unlocked?: boolean }>(session)
         if (cancelled) return
         if (data.unlocked) {
           await loadPhotos()
@@ -119,11 +142,15 @@ export function GuestShare() {
           setUnlocked(false)
           setStatus("ready")
         }
-      } catch {
+      } catch (error) {
         if (!cancelled) {
           setUnlocked(false)
           setStatus("error")
-          setViewMessage("Guest album will appear once the server is ready.")
+          setViewMessage(
+            error instanceof Error
+              ? error.message
+              : "Guest album will appear once the server is ready.",
+          )
         }
       }
     }
@@ -144,7 +171,7 @@ export function GuestShare() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ pin }),
       })
-      const data = (await response.json()) as { error?: string }
+      const data = await readApiJson<{ error?: string }>(response)
       if (!response.ok) {
         throw new Error(data.error || "That PIN is not correct.")
       }
@@ -194,10 +221,10 @@ export function GuestShare() {
         credentials: "include",
         body,
       })
-      const data = (await response.json()) as {
+      const data = await readApiJson<{
         photo?: GuestPhoto
         error?: string
-      }
+      }>(response)
       if (!response.ok || !data.photo) {
         throw new Error(data.error || "Could not save that photo.")
       }

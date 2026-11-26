@@ -1261,31 +1261,181 @@ textarea {
   }
 }
 
-/* QR is for printed table cards — hide when a guest already scanned in. */
-.guest-share--focus-upload .guest-share__qr {
-  display: none;
+/* Standalone /share: brand + upload only — no invite chrome. */
+.site--share-standalone {
+  min-height: 100vh;
+  background:
+    radial-gradient(900px 480px at 12% -10%, rgba(139, 69, 80, 0.18), transparent 55%),
+    radial-gradient(700px 420px at 100% 8%, rgba(176, 141, 87, 0.14), transparent 48%),
+    linear-gradient(165deg, #3a1820 0%, var(--burgundy) 42%, #2a1218 100%);
+  color: var(--paper);
 }
 
-@media (max-width: 719px) {
-  .guest-share--focus-upload .guest-share__layout {
-    gap: 1rem;
+.share-standalone {
+  width: min(100%, 28rem);
+  margin: 0 auto;
+  padding: clamp(1.75rem, 5vw, 3rem) clamp(1.15rem, 4vw, 1.75rem) 2.5rem;
+  display: grid;
+  gap: 1.5rem;
+  animation: share-standalone-rise 700ms var(--ease) both;
+}
+
+@keyframes share-standalone-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-
-/* QR deep link: put upload first so guests never fight scroll/gate. */
-.site--share-landing main {
-  display: flex;
-  flex-direction: column;
+.share-standalone__brand {
+  text-align: center;
+  padding: 0.25rem 0 0.5rem;
 }
 
-.site--share-landing .share {
-  order: -1;
-  padding-top: calc(var(--space-md) + 4.5rem);
+.share-standalone__monogram {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 4vw, 1.7rem);
+  font-weight: 560;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brass-soft);
 }
 
-.site--share-landing .share--landing {
-  padding-top: calc(var(--space-md) + 4.5rem);
+.share-standalone__names {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 10vw, 3.35rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+}
+
+.share-standalone__names span {
+  display: block;
+  margin: 0.35rem 0;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(232, 213, 168, 0.78);
+}
+
+.share-standalone__date {
+  margin: 0.9rem 0 0;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  color: rgba(251, 246, 240, 0.72);
+}
+
+.share-standalone__panel {
+  animation: share-standalone-rise 800ms var(--ease) 120ms both;
+}
+
+.share-standalone__panel .guest-share__intro {
+  margin-bottom: 1.1rem;
+  text-align: center;
+  max-width: none;
+}
+
+.share-standalone__panel .section__title {
+  color: var(--paper);
+  font-size: clamp(1.65rem, 5vw, 2.1rem);
+}
+
+.share-standalone__panel .section__body {
+  color: rgba(251, 246, 240, 0.78);
+  margin-inline: auto;
+}
+
+.share-standalone__panel .guest-share__layout {
+  grid-template-columns: 1fr;
+}
+
+.share-standalone__panel .guest-share__form {
+  background: rgba(251, 246, 240, 0.96);
+  border-color: rgba(251, 246, 240, 0.2);
+  box-shadow: 0 20px 48px rgba(20, 8, 12, 0.28);
+  color: var(--ink);
+}
+
+.share-standalone__panel .guest-share__album--secondary {
+  margin-top: 0.35rem;
+  color: var(--paper);
+}
+
+.share-standalone__panel .guest-share__album-summary {
+  color: rgba(232, 213, 168, 0.92);
+}
+
+.share-standalone__panel .guest-share__album-title,
+.share-standalone__panel .guest-share__empty,
+.share-standalone__panel .guest-share__lock-copy,
+.share-standalone__panel .guest-share__message {
+  color: rgba(251, 246, 240, 0.88);
+}
+
+.share-standalone__panel .guest-share__form--view {
+  background: rgba(251, 246, 240, 0.1);
+  border-color: rgba(251, 246, 240, 0.18);
+  color: var(--paper);
+}
+
+.share-standalone__panel .guest-share__form--view .guest-share__field {
+  color: rgba(232, 213, 168, 0.85);
+}
+
+.share-standalone__panel .guest-share__form--view .guest-share__message {
+  color: var(--brass-soft);
+}
+
+.share-standalone__invite {
+  margin: 0.25rem 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.share-standalone__invite a {
+  color: rgba(232, 213, 168, 0.88);
+  text-underline-offset: 0.22em;
+}
+
+.share-standalone__invite a:hover {
+  color: var(--brass-soft);
+}
+
+.guest-share__album--secondary {
+  margin-top: var(--space-md);
+}
+
+.guest-share__album-summary {
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.85rem 0;
+  border-top: 1px solid rgba(251, 246, 240, 0.16);
+  border-bottom: 1px solid rgba(251, 246, 240, 0.16);
+}
+
+.guest-share__album-summary::-webkit-details-marker {
+  display: none;
+}
+
+.guest-share__album--secondary[open] .guest-share__album-summary {
+  margin-bottom: 1rem;
+  border-bottom-color: transparent;
+}
+
+.guest-share__album--secondary .guest-share__album-head {
+  margin-top: 0.35rem;
 }
 
 .guest-share__qr {

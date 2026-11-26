@@ -24,32 +24,13 @@ export function buildShareQrUrl(publicUrl: string, originFallback?: string): str
   return `${base}${SHARE_PATH}`
 }
 
-/** Keep path + hash aligned so native anchors and our scroll agree. */
+/** Keep the standalone share path clean (drop leftover #share hashes). */
 export function normalizeShareUrl(): void {
   const path = window.location.pathname.replace(/\/+$/, "") || "/"
-  const nextPath = path === SHARE_PATH || path.endsWith(SHARE_PATH) ? path : SHARE_PATH
-  const next = `${nextPath}#${SHARE_SECTION_ID}`
-  const current = `${window.location.pathname}${window.location.hash}`
-  if (current !== next) {
-    window.history.replaceState(null, "", next)
+  const nextPath =
+    path === SHARE_PATH || path.endsWith(SHARE_PATH) ? path : SHARE_PATH
+  const current = `${window.location.pathname}${window.location.search}${window.location.hash}`
+  if (current !== nextPath) {
+    window.history.replaceState(null, "", nextPath)
   }
-}
-
-/** Scroll the Share upload block into view after the invite unlocks. */
-export function scrollToShareSection(behavior: ScrollBehavior = "auto"): void {
-  const target = document.getElementById(SHARE_SECTION_ID)
-  if (!target) return
-
-  const immediate = behavior === "auto"
-  const lenis = (
-    window as Window & {
-      __lenis?: { scrollTo: (el: HTMLElement, opts?: object) => void }
-    }
-  ).__lenis
-  if (lenis) {
-    lenis.scrollTo(target, { offset: -16, immediate, duration: 0.6 })
-    return
-  }
-
-  target.scrollIntoView({ behavior, block: "start" })
 }

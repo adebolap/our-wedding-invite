@@ -5,14 +5,23 @@ const STORAGE_KEY = "kelly-seun-invite-opened"
 
 type InviteGateProps = {
   onOpen: () => void
+  /** Skip the envelope when guests arrive via the Share QR deep link. */
+  bypass?: boolean
 }
 
-export function InviteGate({ onOpen }: InviteGateProps) {
+export function InviteGate({ onOpen, bypass = false }: InviteGateProps) {
   const [visible, setVisible] = useState(() => {
+    if (bypass) return false
     if (typeof sessionStorage === "undefined") return true
     return sessionStorage.getItem(STORAGE_KEY) !== "1"
   })
   const [exiting, setExiting] = useState(false)
+
+  useEffect(() => {
+    if (bypass && typeof sessionStorage !== "undefined") {
+      sessionStorage.setItem(STORAGE_KEY, "1")
+    }
+  }, [bypass])
 
   useEffect(() => {
     if (!visible) onOpen()

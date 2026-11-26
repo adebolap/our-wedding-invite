@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { site } from "./site.config"
 import { Countdown } from "./components/Countdown"
 import { InviteGate } from "./components/InviteGate"
@@ -9,19 +9,46 @@ import { Reveal } from "./components/Reveal"
 import { SiteNav } from "./components/SiteNav"
 import { StyleInspiration } from "./components/StyleInspiration"
 import { useLenis } from "./hooks/useLenis"
+import {
+  isShareDeepLink,
+  scrollToShareSection,
+} from "./lib/shareDeepLink"
 
 export default function App() {
+  const [shareLanding] = useState(() =>
+    typeof window === "undefined" ? false : isShareDeepLink(),
+  )
   const [opened, setOpened] = useState(false)
   const handleOpen = useCallback(() => setOpened(true), [])
   useLenis(opened)
 
+  useEffect(() => {
+    if (!opened || !shareLanding) return
+
+    // Wait a frame so unlocked layout / Lenis are ready, then land on upload.
+    let cancelled = false
+    const settle = window.setTimeout(() => {
+      if (cancelled) return
+      scrollToShareSection("smooth")
+      const upload = document.getElementById("guest-share-upload")
+      upload?.focus({ preventScroll: true })
+    }, 80)
+
+    return () => {
+      cancelled = true
+      window.clearTimeout(settle)
+    }
+  }, [opened, shareLanding])
+
   return (
-    <div className={`site${opened ? " site--open" : " site--locked"}`}>
+    <div
+      className={`site${opened ? " site--open" : " site--locked"}${shareLanding ? " site--share-landing" : ""}`}
+    >
       <a className="skip-link" href="#main">
         Skip to content
       </a>
 
-      <InviteGate onOpen={handleOpen} />
+      <InviteGate onOpen={handleOpen} bypass={shareLanding} />
 
       <SiteNav />
       <JourneyRail active={opened} />
@@ -174,11 +201,11 @@ export default function App() {
           </div>
         </Reveal>
 
-        <Reveal as="section" className="section share" delay={90}>
+        <section className={`section share${shareLanding ? " share--landing" : ""}`}>
           <div id="share" aria-labelledby="share-title">
-            <GuestShare />
+            <GuestShare focusUpload={shareLanding} />
           </div>
-        </Reveal>
+        </section>
       </main>
 
       <footer className="footer">

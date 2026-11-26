@@ -14,7 +14,7 @@ Edit [`src/site.config.ts`](src/site.config.ts) to set:
 
 ## Guest photo album
 
-Guests can scan the Share QR code or open `#share` to upload photos.
+Guests can scan the Share QR code or open `/share` to upload photos (legacy `#share` still works).
 
 - Schema: `migrations/001_guest_photos.sql`
 - API: `GET/POST /api/photos`, `GET /api/photos/:id`

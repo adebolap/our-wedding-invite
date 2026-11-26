@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react"
 import QRCode from "qrcode"
 import { site } from "../site.config"
+import { buildShareQrUrl } from "../lib/shareDeepLink"
 
 type GuestPhoto = {
   id: string
@@ -71,7 +72,12 @@ async function compressImage(file: File): Promise<Blob> {
   return blob
 }
 
-export function GuestShare() {
+type GuestShareProps = {
+  /** When true, guests arrived from the table QR — emphasize upload. */
+  focusUpload?: boolean
+}
+
+export function GuestShare({ focusUpload = false }: GuestShareProps) {
   const [photos, setPhotos] = useState<GuestPhoto[]>([])
   const [unlocked, setUnlocked] = useState(false)
   const [pin, setPin] = useState("")
@@ -84,9 +90,11 @@ export function GuestShare() {
   const [fileName, setFileName] = useState("")
 
   const shareUrl = useMemo(() => {
-    if (site.share.publicUrl) return `${site.share.publicUrl}#share`
-    if (typeof window === "undefined") return "#share"
-    return `${window.location.origin}${window.location.pathname}#share`
+    const origin =
+      typeof window === "undefined"
+        ? undefined
+        : `${window.location.origin}${window.location.pathname.replace(/\/share\/?$/, "") || ""}`
+    return buildShareQrUrl(site.share.publicUrl, origin)
   }, [])
 
   useEffect(() => {
@@ -250,59 +258,48 @@ export function GuestShare() {
     }
   }
 
+  const displayUrl = shareUrl.replace(/^https?:\/\//, "")
+
   return (
-    <div className="guest-share">
+    <div
+      className={`guest-share${focusUpload ? " guest-share--focus-upload" : ""}`}
+    >
       <div className="guest-share__intro">
         <p className="section__eyebrow">{site.share.eyebrow}</p>
         <h2 className="section__title" id="share-title">
           {site.share.headline}
         </h2>
-        <p className="section__body">{site.share.body}</p>
+        <p className="section__body">
+          {focusUpload
+            ? "Add a photo from your camera roll or take a new one. Name and note are optional."
+            : site.share.body}
+        </p>
       </div>
 
       <div className="guest-share__layout">
         <figure className="guest-share__qr">
           {qrDataUrl ? (
-            <img src={qrDataUrl} alt="QR code to share your wedding photos" />
+            <img src={qrDataUrl} alt="QR code to open Share and upload wedding photos" />
           ) : (
             <div className="guest-share__qr-fallback" aria-hidden="true" />
           )}
           <figcaption>
-            Scan to open this page and share a photo. Viewing the album needs
-            the PIN.
+            Scan to open Share and upload. Viewing the album needs the PIN.
             <a className="guest-share__link" href={shareUrl}>
-              {shareUrl.replace(/^https?:\/\//, "")}
+              {displayUrl}
             </a>
           </figcaption>
         </figure>
 
-        <form className="guest-share__form" onSubmit={onSubmit}>
-          <label className="guest-share__field">
-            <span>Your name</span>
-            <input
-              type="text"
-              name="guestName"
-              autoComplete="name"
-              maxLength={60}
-              value={guestName}
-              onChange={(event) => setGuestName(event.target.value)}
-              placeholder="Optional"
-            />
-          </label>
-          <label className="guest-share__field">
-            <span>A short note</span>
-            <input
-              type="text"
-              name="caption"
-              maxLength={140}
-              value={caption}
-              onChange={(event) => setCaption(event.target.value)}
-              placeholder="Optional"
-            />
-          </label>
+        <form
+          className="guest-share__form"
+          id="guest-share-upload"
+          tabIndex={-1}
+          onSubmit={onSubmit}
+        >
           <label className="guest-share__file">
             <span className="btn btn--ink guest-share__file-btn">
-              {fileName || "Choose a photo"}
+              {fileName || "Take or choose a photo"}
             </span>
             <input
               type="file"
@@ -314,8 +311,36 @@ export function GuestShare() {
               }
             />
           </label>
+
+          <div className="guest-share__optional">
+            <p className="guest-share__optional-label">Optional details</p>
+            <label className="guest-share__field">
+              <span>Your name</span>
+              <input
+                type="text"
+                name="guestName"
+                autoComplete="name"
+                maxLength={60}
+                value={guestName}
+                onChange={(event) => setGuestName(event.target.value)}
+                placeholder="Optional"
+              />
+            </label>
+            <label className="guest-share__field">
+              <span>A short note</span>
+              <input
+                type="text"
+                name="caption"
+                maxLength={140}
+                value={caption}
+                onChange={(event) => setCaption(event.target.value)}
+                placeholder="Optional"
+              />
+            </label>
+          </div>
+
           <button
-            className="btn btn--gold"
+            className="btn btn--gold guest-share__submit"
             type="submit"
             disabled={status === "uploading"}
           >
@@ -353,6 +378,7 @@ export function GuestShare() {
               <input
                 type="password"
                 name="pin"
+                inputMode="numeric"
                 autoComplete="off"
                 value={pin}
                 onChange={(event) => setPin(event.target.value)}

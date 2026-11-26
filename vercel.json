@@ -52,6 +52,10 @@
       "destination": "/api/[...route]"
     },
     {
+      "source": "/share",
+      "destination": "/index.html"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }

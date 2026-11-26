@@ -2,6 +2,7 @@ import { readFileSync, existsSync } from "node:fs"
 import { resolve } from "node:path"
 import { serve } from "@hono/node-server"
 import app from "../server/app.ts"
+import { setSqlOverride } from "../server/db.ts"
 
 function loadEnvFile(fileName) {
   const filePath = resolve(process.cwd(), fileName)
@@ -25,6 +26,11 @@ function loadEnvFile(fileName) {
 
 loadEnvFile(".env.local")
 loadEnvFile(".env")
+
+if (!process.env.DATABASE_URL?.trim()) {
+  const { localSql } = await import("../server/db-local.ts")
+  setSqlOverride(localSql)
+}
 
 const port = Number(process.env.API_PORT || 8787)
 serve({ fetch: app.fetch, port }, () => {

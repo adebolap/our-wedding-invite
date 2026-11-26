@@ -62,14 +62,23 @@ export async function hasValidAlbumSession(c: Context): Promise<boolean> {
   return timingSafeEqualString(cookie, await sessionToken(expected))
 }
 
+function requestIsHttps(c: Context): boolean {
+  const forwarded = c.req.header("x-forwarded-proto")?.split(",")[0]?.trim()
+  if (forwarded) return forwarded === "https"
+  try {
+    return new URL(c.req.url, "http://localhost").protocol === "https:"
+  } catch {
+    return false
+  }
+}
+
 export async function unlockAlbum(c: Context, pin: string): Promise<boolean> {
   const expected = expectedAlbumPin()
   if (!expected || !timingSafeEqualString(pin, expected)) return false
 
-  const secure = new URL(c.req.url).protocol === "https:"
   setCookie(c, COOKIE_NAME, await sessionToken(expected), {
     httpOnly: true,
-    secure,
+    secure: requestIsHttps(c),
     sameSite: "Lax",
     path: "/",
     maxAge: 60 * 60 * 24 * 14,

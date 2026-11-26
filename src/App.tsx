@@ -9,11 +9,7 @@ import { Reveal } from "./components/Reveal"
 import { SiteNav } from "./components/SiteNav"
 import { StyleInspiration } from "./components/StyleInspiration"
 import { useLenis } from "./hooks/useLenis"
-import {
-  isShareDeepLink,
-  normalizeShareUrl,
-  scrollToShareSection,
-} from "./lib/shareDeepLink"
+import { isShareDeepLink, normalizeShareUrl } from "./lib/shareDeepLink"
 
 export default function App() {
   const [shareLanding] = useState(() =>
@@ -24,41 +20,56 @@ export default function App() {
   useLenis(opened && !shareLanding)
 
   useEffect(() => {
-    if (!opened || !shareLanding) return
-
+    if (!shareLanding) return
     normalizeShareUrl()
+  }, [shareLanding])
 
-    // Retry: Lenis mounts after unlock, and mobile layout settles late.
-    let cancelled = false
-    const jump = () => {
-      if (cancelled) return
-      scrollToShareSection("auto")
-      document
-        .getElementById("guest-share-upload")
-        ?.focus({ preventScroll: true })
-    }
+  if (shareLanding) {
+    return (
+      <div className="site site--open site--share-standalone">
+        <a className="skip-link" href="#guest-share-upload">
+          Skip to upload
+        </a>
 
-    jump()
-    const timers = [50, 150, 400, 900].map((ms) => window.setTimeout(jump, ms))
+        <InviteGate onOpen={handleOpen} bypass />
 
-    return () => {
-      cancelled = true
-      for (const timer of timers) window.clearTimeout(timer)
-    }
-  }, [opened, shareLanding])
+        <main id="main" className="share-standalone">
+          <header className="share-standalone__brand">
+            <p className="share-standalone__monogram">{site.monogram}</p>
+            <h1 className="share-standalone__names">
+              {site.partners.one.first}
+              <span>and</span>
+              {site.partners.two.first}
+            </h1>
+            <p className="share-standalone__date">{site.date.label}</p>
+          </header>
+
+          <section
+            className="share-standalone__panel"
+            id="share"
+            aria-labelledby="share-title"
+          >
+            <GuestShare focusUpload />
+          </section>
+
+          <p className="share-standalone__invite">
+            <a href="/">Open the full invite</a>
+          </p>
+        </main>
+      </div>
+    )
+  }
 
   return (
-    <div
-      className={`site${opened ? " site--open" : " site--locked"}${shareLanding ? " site--share-landing" : ""}`}
-    >
+    <div className={`site${opened ? " site--open" : " site--locked"}`}>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
 
-      <InviteGate onOpen={handleOpen} bypass={shareLanding} />
+      <InviteGate onOpen={handleOpen} />
 
       <SiteNav />
-      <JourneyRail active={opened} initialStep={shareLanding ? "share" : "hero"} />
+      <JourneyRail active={opened} />
 
       <main id="main">
         <section className="hero" id="hero" aria-label="Invitation">
@@ -171,7 +182,11 @@ export default function App() {
         </section>
 
         <Reveal as="section" className="section venue" delay={60}>
-          <div id="venue" aria-labelledby="venue-title" className="venue__inner venue__inner--simple">
+          <div
+            id="venue"
+            aria-labelledby="venue-title"
+            className="venue__inner venue__inner--simple"
+          >
             <div className="venue__copy">
               <p className="section__eyebrow">Where</p>
               <h2 className="section__title" id="venue-title">
@@ -208,9 +223,9 @@ export default function App() {
           </div>
         </Reveal>
 
-        <section className={`section share${shareLanding ? " share--landing" : ""}`}>
+        <section className="section share">
           <div id="share" aria-labelledby="share-title">
-            <GuestShare focusUpload={shareLanding} />
+            <GuestShare />
           </div>
         </section>
       </main>

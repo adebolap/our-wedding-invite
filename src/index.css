@@ -1239,6 +1239,10 @@ textarea {
   padding-bottom: calc(var(--space-2xl) + 1rem);
 }
 
+#share {
+  scroll-margin-top: 5.5rem;
+}
+
 .guest-share__intro {
   margin-bottom: var(--space-lg);
   max-width: 40rem;
@@ -1268,8 +1272,20 @@ textarea {
   }
 }
 
-.share--landing {
-  padding-top: calc(var(--space-lg) + 2.5rem);
+
+/* QR deep link: put upload first so guests never fight scroll/gate. */
+.site--share-landing main {
+  display: flex;
+  flex-direction: column;
+}
+
+.site--share-landing .share {
+  order: -1;
+  padding-top: calc(var(--space-md) + 4.5rem);
+}
+
+.site--share-landing .share--landing {
+  padding-top: calc(var(--space-md) + 4.5rem);
 }
 
 .guest-share__qr {

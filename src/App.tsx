@@ -11,6 +11,7 @@ import { StyleInspiration } from "./components/StyleInspiration"
 import { useLenis } from "./hooks/useLenis"
 import {
   isShareDeepLink,
+  normalizeShareUrl,
   scrollToShareSection,
 } from "./lib/shareDeepLink"
 
@@ -20,23 +21,29 @@ export default function App() {
   )
   const [opened, setOpened] = useState(false)
   const handleOpen = useCallback(() => setOpened(true), [])
-  useLenis(opened)
+  useLenis(opened && !shareLanding)
 
   useEffect(() => {
     if (!opened || !shareLanding) return
 
-    // Wait a frame so unlocked layout / Lenis are ready, then land on upload.
+    normalizeShareUrl()
+
+    // Retry: Lenis mounts after unlock, and mobile layout settles late.
     let cancelled = false
-    const settle = window.setTimeout(() => {
+    const jump = () => {
       if (cancelled) return
-      scrollToShareSection("smooth")
-      const upload = document.getElementById("guest-share-upload")
-      upload?.focus({ preventScroll: true })
-    }, 80)
+      scrollToShareSection("auto")
+      document
+        .getElementById("guest-share-upload")
+        ?.focus({ preventScroll: true })
+    }
+
+    jump()
+    const timers = [50, 150, 400, 900].map((ms) => window.setTimeout(jump, ms))
 
     return () => {
       cancelled = true
-      window.clearTimeout(settle)
+      for (const timer of timers) window.clearTimeout(timer)
     }
   }, [opened, shareLanding])
 
@@ -51,7 +58,7 @@ export default function App() {
       <InviteGate onOpen={handleOpen} bypass={shareLanding} />
 
       <SiteNav />
-      <JourneyRail active={opened} />
+      <JourneyRail active={opened} initialStep={shareLanding ? "share" : "hero"} />
 
       <main id="main">
         <section className="hero" id="hero" aria-label="Invitation">

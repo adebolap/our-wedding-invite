@@ -11,8 +11,8 @@ const steps = [
 
 type StepId = (typeof steps)[number]["id"]
 
-export function JourneyRail({ active }: { active: boolean }) {
-  const [current, setCurrent] = useState<StepId>("hero")
+export function JourneyRail({ active, initialStep = "hero" }: { active: boolean; initialStep?: StepId }) {
+  const [current, setCurrent] = useState<StepId>(initialStep)
 
   useEffect(() => {
     if (!active) return
